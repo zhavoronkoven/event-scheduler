@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div id="learndash-page-content">
+			<div class="learndash-content-body">
+				
+					<div class="learndash-wrapper learndash-wrapper--topic">
+												 <div id="learndash-course-header" class="bb-lms-header">
+
+							<div class="lms-header-title">
+								<h1>Project Guidelines and Requirements</h1>
+							</div>
+							<div class="lms-header-instructor">
+	
+        <div class="bb-about-instructor bb_single_meta_off">
+            <div class="flex">
+				                <div class="bb-content-wrap">
+                    <h5>
+						                    </h5>
+                </div>
+            </div>
+        </div>
+		</div>						</div>
+
+					<div class="learndash_content_wrap">
+
+							<div class="ld-progress ">
+					<div class="ld-progress-heading">
+									<div class="ld-progress-label">
+						Lesson Progress					</div>
+							</div>
+
+			<div class="ld-progress-bar">
+				<div class="ld-progress-bar-percentage ld-secondary-background" style="width:0%"></div>
+			</div>
+			<div class="ld-progress-stats">
+				<div class="ld-progress-percentage ld-secondary-color course-completion-rate">
+					0% Complete				</div>
+				<div class="ld-progress-steps">
+									</div>
+			</div> <!--/.ld-progress-stats-->
+				</div> <!--/.ld-progress-->
+	
+<div class="ld-tabs ld-tab-count-1">
+	
+	<div class="ld-tabs-content">
+		
+							<div class="ld-tab-content ld-visible" id="ld-tab-content-88936">
+											<div class="github-markdown"><p>This project is designed to enhance your skills in React by building an application that interacts with real data via a RESTful API. Until now, we've only stored data in the browser using <code>localStorage</code> or relied on existing data from APIs like the Pokemon API or the Movie DB. However, in a real application, we will need to persist some data, which will ultimately live inside a database. For now, it should suffice to know that some APIs expose endpoints or methods to create, read, update, or delete data, collectively known as CRUD. These actions map to the POST, GET, PUT, and DELETE HTTP request methods!</p>
+<h3>Duration: 5 days (Full Time) / 10 Days (Part Time)</h3>
+<h3Presentation: TBD by Instructor | Mandatory</h3>
+<h3>Project Requirements</h3>
+<table>
+<thead>
+<tr>
+<th><strong>ID</strong></th>
+<th><strong>Functional Requirement</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FR003</strong></td>
+<td><strong>Public GitHub Repository</strong></td>
+<td>Keep all code in a single <strong>public</strong> repo; do <strong>not</strong> add instructors as collaborators.</td>
+</tr>
+<tr>
+<td><strong>FR004</strong></td>
+<td><strong>Incremental Development with PRs</strong></td>
+<td>Merge every change into <code>main</code> exclusively via Pull Requests.</td>
+</tr>
+<tr>
+<td><strong>FR005</strong></td>
+<td><strong>React + Vite Front-End</strong></td>
+<td>Scaffold and run the app with Vite using React.</td>
+</tr>
+<tr>
+<td><strong>FR006</strong></td>
+<td><strong>TailwindCSS Styling</strong></td>
+<td>Style the UI with TailwindCSS (may augment with DaisyUI).</td>
+</tr>
+<tr>
+<td><strong>FR007</strong></td>
+<td><strong>React Router Setup</strong></td>
+<td>Configure routing with React Router, including protected routes.</td>
+</tr>
+<tr>
+<td><strong>FR008</strong></td>
+<td><strong>State &amp; Effects Management</strong></td>
+<td>Use React hooks (<code>useState</code>, <code>useEffect</code>, etc.) to manage UI state and side-effects.</td>
+</tr>
+<tr>
+<td><strong>FR010</strong></td>
+<td><strong>Run Local Events API</strong></td>
+<td>Clone, install and run the provided Events API locally for development.</td>
+</tr>
+<tr>
+<td><strong>FR011</strong></td>
+<td><strong>Home Page – Event List</strong></td>
+<td>Fetch events (<code>GET /api/events</code>) and render them as cards sorted chronologically.</td>
+</tr>
+<tr>
+<td><strong>FR012</strong></td>
+<td><strong>Event Card Navigation</strong></td>
+<td>Clicking an event card navigates to <code>/events/:id</code> with React Router.</td>
+</tr>
+<tr>
+<td><strong>FR013</strong></td>
+<td><strong>Event Details Page</strong></td>
+<td>Fetch and display full event data by ID (<code>GET /api/events/:id</code>).</td>
+</tr>
+<tr>
+<td><strong>FR014</strong></td>
+<td><strong>Sign-Up Page</strong></td>
+<td>Render registration form; send <code>POST /api/users</code>; on success redirect to <strong>Sign-In</strong>.</td>
+</tr>
+<tr>
+<td><strong>FR015</strong></td>
+<td><strong>Sign-In Page</strong></td>
+<td>Render login form; send <code>POST /api/auth/login</code>; on success store API token and redirect to Home.</td>
+</tr>
+<tr>
+<td><strong>FR009</strong></td>
+<td><strong>API Key Persistence</strong></td>
+<td>Store/retrieve the user’s API token in <code>localStorage</code>.</td>
+</tr>
+<tr>
+<td><strong>FR016</strong></td>
+<td><strong>Protected Route Layout</strong></td>
+<td>Wrap routes that require authentication (e.g., <strong>Create Event</strong>) in a guard that redirects unauthenticated users to <strong>Sign-In</strong>.</td>
+</tr>
+<tr>
+<td><strong>FR017</strong></td>
+<td><strong>Create Event Page</strong></td>
+<td>Provide a form that sends <code>POST /api/events</code> with the token; block access and submission if no valid token.</td>
+</tr>
+<tr>
+<td><strong>FR018</strong></td>
+<td><strong>Token Injection in Requests</strong></td>
+<td>Automatically attach the stored token to request headers</td>
+</tr>
+<tr>
+<td><strong>FR019</strong></td>
+<td><strong>Error Handling &amp; Feedback</strong></td>
+<td>Gracefully display API or network errors (e.g., auth failure, 404) to the user.</td>
+</tr>
+<tr>
+<td><strong>FR020</strong></td>
+<td><strong>Responsive Design</strong></td>
+<td>Ensure the UI remains usable across mobile and desktop break-points.</td>
+</tr>
+<tr>
+<td><strong>FR021</strong></td>
+<td><strong>Static-Site Deployment</strong></td>
+<td>Build the React app and deploy the static output to Render.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>API:</strong> <a target="_blank" rel="noreferrer noopener" href="https://github.com/WebDev-WBSCodingSchool/events-api">Head over to this repo</a>, follow the instructions for installing and running the app. You should have a working API running on your computer. The API is fully documented and you can even try some endpoints in the live documentation powered by <a target="_blank" rel="noreferrer noopener" href="https://swagger.io/tools/swagger-ui/">Swagger UI</a>. You’ll eventually learn how to create your very own RESTful APIs in the meantime, we got this.</p>
+<h3><strong>HOLD UP!</strong></h3>
+<p>Before you even think of opening VS Code to set up your project, take a moment to plan your application:</p>
+<ul>
+<li>Create a mock on Figma, MS Paint, or paper! The application is simple enough, but you can make it as pretty and cool as you want!</li>
+<li>Plan your routes ahead of time so you can structure your application accordingly.</li>
+<li>Break your UI into components the way you did in the past</li>
+<li>Distribute the tasks and load</li>
+</ul>
+<h3><strong>Tips for Effective Planning</strong></h3>
+<ul>
+<li><strong>Daily stand-ups</strong>: Use them to keep your instructor in the loop about blockers and to share insights with your classmates.</li>
+<li><strong>Keep things tidy and in order</strong>: You won't find a Trello board here, but you can create one on your own!</li>
+<li><strong>ASK FOR HELP</strong>: If you're stuck for more than 30 minutes, don't hesitate to reach out for assistance!</li>
+</ul>
+<h3><strong>Conclusion</strong></h3>
+<p>This project will enhance your skills with hands-on experience in working with React, managing localStorage, interacting with APIs, and creating interactive web applications. Dive in, enjoy the process, and happy coding!</p>
+<h3><strong>Project Resources</strong></h3>
+<ul>
+<li><a target="_blank" rel="noreferrer noopener" href="https://react.dev/">React Documentation</a></li>
+<li><a target="_blank" rel="noreferrer noopener" href="https://tailwindcss.com/docs/guides/vite">TailwindCSS Documentation</a></li>
+<li><a target="_blank" rel="noreferrer noopener" href="https://daisyui.com/">DaisyUI Documentation</a></li>
+<li><a target="_blank" rel="noreferrer noopener" href="https://reactrouter.com/">React Router Documentation</a></li>
+<li><a target="_blank" rel="noreferrer noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API">Web Storage API</a></li>
+</ul></div>
+			</div>
+
+			
+	</div> <!--/.ld-tabs-content-->
+
+</div> <!--/.ld-tabs-->
+<div class="learndash-wrapper learndash-shortcode-wrap-ld_navigation-109039_88936_6843">
+	<div class="ld-content-actions">
+
+						<div class="ld-content-action">
+					</div>
+
+					
+	</div> <!--/.ld-topic-actions-->
+</div>
+						</div>
+					</div> <!--/.learndash-wrapper-->
+							</div>		</div>    
+</body>
+</html>
