@@ -11,10 +11,10 @@ const Navbar = () => {
       <NavLink role="tab" to="/" className={showActive}>
         Home
       </NavLink>
-      <NavLink to="/new" className={showActive}>
+      <NavLink to="/new-event" className={showActive}>
         + New
       </NavLink>
-      <NavLink to="/details" className={showActive}>
+      <NavLink to="/events/:title" className={showActive}>
         Details
       </NavLink>
       <NavLink to="/login" className={showActive}>
