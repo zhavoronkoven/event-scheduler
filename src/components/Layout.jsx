@@ -4,13 +4,13 @@ import Header from "./Header";
 
 const Layout = () => {
   return (
-    <>
+    <div className="flex flex-col h-full">
       <Header />
-      <main>
+      <main className="grow ">
         <Outlet />
       </main>
       <Footer />
-    </>
+    </div>
   );
 };
 
