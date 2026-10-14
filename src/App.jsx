@@ -13,10 +13,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
-            <Route path="neu" element={<CreateEventPage />} />
+            <Route path="new" element={<CreateEventPage />} />
             <Route path="details" element={<EventDetailsPage />} />
-            <Route path="anmelden" element={<SignInPage />} />
-            <Route path="registrieren" element={<SignUpPage />} />
+            <Route path="login" element={<SignInPage />} />
+            <Route path="register" element={<SignUpPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

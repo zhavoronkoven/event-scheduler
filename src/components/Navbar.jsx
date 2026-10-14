@@ -11,15 +11,17 @@ const Navbar = () => {
       <NavLink role="tab" to="/" className={showActive}>
         Home
       </NavLink>
-      <NavLink to="/neu" className={showActive}>
-        + Neu
+      <NavLink to="/new" className={showActive}>
+        + New
       </NavLink>
-      <NavLink to="/details" className={showActive}>Details</NavLink>
-      <NavLink to="/anmelden" className={showActive}>
-        Anmelden
+      <NavLink to="/details" className={showActive}>
+        Details
       </NavLink>
-      <NavLink to="/registrieren" className={showActive}>
-        Registrieren
+      <NavLink to="/login" className={showActive}>
+        Sign in
+      </NavLink>
+      <NavLink to="/register" className={showActive}>
+        Sign up
       </NavLink>
     </nav>
   );
