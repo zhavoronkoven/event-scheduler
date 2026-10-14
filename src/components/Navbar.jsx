@@ -14,7 +14,7 @@ const Navbar = () => {
       <NavLink to="/neu" className={showActive}>
         + Neu
       </NavLink>
-      {/* <Link to="/details" className="tab btn">Details</Link> */}
+      <NavLink to="/details" className={showActive}>Details</NavLink>
       <NavLink to="/anmelden" className={showActive}>
         Anmelden
       </NavLink>
