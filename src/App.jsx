@@ -7,6 +7,7 @@ import {
   SignUpPage,
 } from "./pages";
 
+// import { MainLayout, ProtectedLayout } from "./layout";
 import { MainLayout } from "./layout";
 
 function App() {
@@ -15,6 +16,9 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
+          {/* <Route path="new-event" element={<ProtectedLayout />}>
+            <Route index element={<CreateEventPage />} />
+          </Route> */}
           <Route path="new-event" element={<CreateEventPage />} />
           <Route path="events/:title" element={<EventDetailsPage />} />
           <Route path="login" element={<SignInPage />} />
