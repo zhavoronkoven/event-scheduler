@@ -1,8 +1,7 @@
 import { Outlet } from "react-router";
-import Footer from "./Footer";
-import Header from "./Header";
+import { Header, Footer } from "../components";
 
-const Layout = () => {
+const MainLayout = () => {
   return (
     <div className="flex flex-col h-full">
       <Header />
@@ -14,4 +13,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default MainLayout;
