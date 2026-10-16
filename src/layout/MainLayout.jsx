@@ -3,9 +3,9 @@ import { Header, Footer } from "../components";
 
 const MainLayout = () => {
   return (
-    <div>
+    <div className="flex h-full flex-col">
       <Header />
-      <main className="py-20">
+      <main className="grow py-20">
         <Outlet />
       </main>
       <Footer />
