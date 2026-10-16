@@ -97,15 +97,15 @@ const SignUpPage = () => {
     <div className="absolute inset-0">
       <LightTunnel
         lightMode
-        cableColor="#e65054"
+        cableColor="#000"
         pulseColor="#"
-        opacity={0.2}
+        opacity={0.1}
       />
     </div>
 <div className="relative z-10">     
    <div className="mx-auto max-w-xl">
         <div className="flex items-center gap-2 border-b border-neutral-200 px-4 py-3 text-[10px] font-semibold uppercase tracking-widest">
-          <span className="h-2 w-2 bg-orange-600" />
+          <span className="h-2 w-2 bg-es-accent" />
           <span>[ Registrierung ]</span>
         </div>
         <header className="px-4 pb-10 pt-12">
