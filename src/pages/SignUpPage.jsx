@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router'
+import LightTunnel from '../components/LightTunnel'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 
 const initialForm = { email: '', password: '', confirm: '', agree: false };
 
@@ -39,16 +40,16 @@ const validate = (form) => {
 };
 
 const SignUpPage = () => {
-  const navigate = useNavigate();
-  const [form, setForm] = useState(initialForm);
-  const [errors, setErrors] = useState({});
-  const [apiError, setApiError] = useState('');
-  const [busy, setBusy] = useState(false);
+  const navigate = useNavigate()
+  const [form, setForm] = useState(initialForm)
+  const [errors, setErrors] = useState({})
+  const [apiError, setApiError] = useState('')
+  const [busy, setBusy] = useState(false)
 
   const handleChange = (key) => (e) => {
-    setForm({ ...form, [key]: e.target.value });
-    setErrors({ ...errors, [key]: undefined });
-  };
+    setForm({ ...form, [key]: e.target.value })
+    setErrors({ ...errors, [key]: undefined })
+  }
 
   const handleAgree = (e) => {
     setForm({ ...form, agree: e.target.checked });
@@ -56,14 +57,14 @@ const SignUpPage = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setApiError('');
+    e.preventDefault()
+    setApiError('')
 
-    const found = validate(form);
-    setErrors(found);
-    if (Object.keys(found).length > 0) return;
+    const found = validate(form)
+    setErrors(found)
+    if (Object.keys(found).length > 0) return
 
-    setBusy(true);
+    setBusy(true)
     try {
       const res = await fetch(`${API_URL}/api/users`, {
         method: 'POST',
@@ -72,33 +73,41 @@ const SignUpPage = () => {
           email: form.email.trim(),
           password: form.password,
         }),
-      });
+      })
 
       if (!res.ok) {
-        const data = await res.json().catch(() => null);
-        throw new Error(data?.message || data?.error || `Fehler ${res.status}`);
+        const data = await res.json().catch(() => null)
+        throw new Error(data?.message || data?.error || `Fehler ${res.status}`)
       }
 
-      navigate('/signin');
+      navigate('/signin')
     } catch (err) {
       setApiError(
         err instanceof TypeError
           ? 'Server nicht erreichbar. Bitte später erneut versuchen.'
-          : err.message
-      );
+          : err.message,
+      )
     } finally {
-      setBusy(false);
+      setBusy(false)
     }
-  };
+  }
 
   return (
-    <div className="bg-[#faf9f6]">
-      <div className="mx-auto max-w-xl">
+      <div className="relative min-h-screen overflow-hidden bg-[#faf9f6]">
+    <div className="absolute inset-0">
+      <LightTunnel
+        lightMode
+        cableColor="#000"
+        pulseColor="#"
+        opacity={0.1}
+      />
+    </div>
+<div className="relative z-10">     
+   <div className="mx-auto max-w-xl">
         <div className="flex items-center gap-2 border-b border-neutral-200 px-4 py-3 text-[10px] font-semibold uppercase tracking-widest">
-          <span className="h-2 w-2 bg-orange-600" />
+          <span className="h-2 w-2 bg-es-accent" />
           <span>[ Registrierung ]</span>
         </div>
-
         <header className="px-4 pb-10 pt-12">
           <h1 className="text-6xl font-extrabold leading-[0.95] tracking-tighter sm:text-7xl">
             Konto
@@ -185,6 +194,7 @@ const SignUpPage = () => {
             </Link>
           </div>
         </form>
+      </div>
       </div>
     </div>
   );
