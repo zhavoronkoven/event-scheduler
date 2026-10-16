@@ -1,0 +1,49 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router";
+
+import { getAllEvents } from "../api";
+import EventCard from "./EventCard";
+
+const EventList = () => {
+  const [events, setEvents] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const fetchedData = async () => {
+      try {
+        const data = await getAllEvents(controller);
+        setEvents(data.results);
+      } catch (err) {
+        if (err.name !== "AbortError") {
+          throw new Error(err.message);
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsLoading((prev) => !prev);
+        }
+      }
+    };
+
+    fetchedData();
+
+    return () => {
+      controller.abort();
+    };
+  }, []);
+
+  return (
+    <ul className="flex flex-col gap-4">
+      {events &&
+        !isLoading &&
+        events.map((event) => (
+          <Link to={`/events/${event.title}`} key={event.title}>
+            <EventCard event={event} />
+          </Link>
+        ))}
+    </ul>
+  );
+};
+
+export default EventList;
