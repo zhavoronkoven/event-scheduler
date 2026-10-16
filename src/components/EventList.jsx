@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
-import { getAllEvents } from "../api";
-import EventCard from "./EventCard";
+import { getAllEvents } from "@/api";
+import { EventCard } from "@/components";
 
 const EventList = () => {
   const [events, setEvents] = useState(null);
