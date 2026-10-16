@@ -12,9 +12,9 @@ const Navbar = () => {
       <NavLink to="/new-event" className={showActive}>
         + New
       </NavLink>
-      <NavLink to="/events/:title" className={showActive}>
+      {/* <NavLink to="/events/:title" className={showActive}>
         Details
-      </NavLink>
+      </NavLink> */}
       <NavLink to="/login" className={showActive}>
         Sign in
       </NavLink>
