@@ -82,7 +82,7 @@ const SignUpPage = () => {
         className="relative z-10 w-full max-w-sm space-y-4 bg-white/80 p-6 rounded-2xl"
       >
         {' '}
-        <h1 className="text-2xl font-semibold tracking-tight">Registrieren</h1>
+        <h1 className="text-2xl test-black font-semibold tracking-tight">Registrieren</h1>
         {apiError && (
           <p
             role="alert"
