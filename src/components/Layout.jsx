@@ -4,9 +4,9 @@ import Header from "./Header";
 
 const Layout = () => {
   return (
-    <div className="flex flex-col h-full">
+    <div>
       <Header />
-      <main className="grow ">
+      <main className="py-20">
         <Outlet />
       </main>
       <Footer />
