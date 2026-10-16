@@ -1,7 +1,39 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-body, html, #root {
-    height: 100%;
+@theme {
+  --color-es-background: #faf9f6; /* body background */
+  --color-es-accent: #dc3311; /* red accent */
+  --color-es-primary: #1a1c1a; /* common text */
+  --color-es-label: #73716b; /* dark gray form comments, labels, bages */
+  --color-es-outline: #c4c7c7; /* light fray */
+  --color-es-divider: #e5e2dc;
+  --font-sans: "Inter", sans-serif;
+
+  --spacing-es-desktop: 3rem;
+  --spacing-es-mobile: 1.5rem;
+  --spacing-es-gap: 0.5rem;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-es-background);
+  color: var(--color-es-primary);
+}
+
+.headline {
+  font-size: 22px;
+  line-height: 28px;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+}
+
+.mono-meta {
+  font-size: 11px;
+  line-height: 14px;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
