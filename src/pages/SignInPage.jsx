@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { LightTunnel } from "@/components";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 const TOKEN_KEY = "token";
 
 const initialForm = { email: "", password: "" };
@@ -11,8 +11,6 @@ const fields = [
   {
     key: "email",
     label: "E-Mail-Adresse",
-    hint: "Pflicht",
-    caption: "Öffentliche Kennung",
     type: "email",
     autoComplete: "email",
     placeholder: "name@domain.com",
@@ -20,8 +18,6 @@ const fields = [
   {
     key: "password",
     label: "Passwort",
-    hint: "Pflicht",
-    caption: "Wird nie angezeigt",
     type: "password",
     autoComplete: "current-password",
     placeholder: "",
@@ -58,7 +54,7 @@ const SignInPage = () => {
 
     setBusy(true);
     try {
-      const res = await fetch(`${API_URL}/api/auth/login`, {
+      const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -89,16 +85,15 @@ const SignInPage = () => {
   };
 
   return (
-    <div className="bg-es-background relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0">
+    <div className="relative min-h-screen">
+      <div className="bg-es-background fixed inset-0 z-0">
         <LightTunnel lightMode cableColor="#000" pulseColor="#" opacity={0.1} />
       </div>
       <div className="relative z-10">
         <div className="mx-auto max-w-xl">
           <div className="flex items-center gap-2 border-b border-neutral-200 px-4 py-3 text-[10px] font-semibold tracking-widest uppercase">
-            <span className="h-2 w-2 bg-orange-600" />
-            <span>[ 01 / Anmeldung ]</span>
-            <span className="text-neutral-400">· Index Protocol Rev. 08</span>
+            <span className="h-2 w-2 bg-es-accent" />
+            <span>[ Anmeldung ]</span>
           </div>
 
           <header className="px-4 pt-12 pb-10">
@@ -134,7 +129,7 @@ const SignInPage = () => {
               <button disabled={busy} className="bg-black px-8 py-4 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-neutral-800 disabled:opacity-50">
                 {busy ? "Wird gesendet …" : "Anmelden"}
               </button>
-              <Link to="/signup" className="border-b-2 border-black text-[10px] font-bold tracking-wider uppercase">
+              <Link to="/register" className="border-b-2 border-black text-[10px] font-bold tracking-wider uppercase">
                 Noch kein Konto? Registrieren →
               </Link>
             </div>
