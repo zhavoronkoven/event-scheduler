@@ -89,8 +89,8 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="bg-es-background relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0">
+    <div className="relative min-h-screen">
+      <div className="bg-es-background fixed inset-0 z-0">
         <LightTunnel lightMode cableColor="#000" pulseColor="#" opacity={0.1} />
       </div>
       <div className="relative z-10">
