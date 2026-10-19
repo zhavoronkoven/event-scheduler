@@ -80,7 +80,7 @@ const SignUpPage = () => {
         throw new Error(data?.message || data?.error || `Fehler ${res.status}`);
       }
 
-      navigate("/signin");
+      navigate("/login", { state: { registered: true } });
     } catch (err) {
       setApiError(err instanceof TypeError ? "Server nicht erreichbar. Bitte später erneut versuchen." : err.message);
     } finally {
