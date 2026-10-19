@@ -5,14 +5,14 @@ const Header = () => {
     <header className="border-b-es-outline bg-es-background/60 fixed top-0 right-0 left-0 z-50 border-b backdrop-blur-lg">
       <div className="px-es-desktop container mx-auto flex h-16 items-center justify-between">
         <div className="flex items-center gap-8">
-          <a href="/" className="gap-es-gap headline flex items-center">
+          <a href="/" className="gap-es-gap headline flex items-center text-nowrap">
             Event Scheduler
             <span className="bg-es-accent inline-block h-2 w-2"></span>
           </a>
           <div className="gap-space-sm mono-meta text-es-label gap-es-gap hidden items-center uppercase lg:flex">
-            <span>[ Public calendar ]</span>
-            <span className="text-es-outline">•</span>
-            <span>WBS Coding School Edition</span>
+            <span className="hidden md:inline">[ Your Time, Your Place ]</span>
+            <span className="text-es-outline hidden xl:inline">•</span>
+            <span className="hidden xl:inline">WBS Coding School Edition</span>
           </div>
         </div>
         <Navbar />

@@ -13,8 +13,8 @@ function App() {
           {/* <Route path="new-event" element={<ProtectedLayout />}>
             <Route index element={<CreateEventPage />} />
           </Route> */}
-          <Route path="new-event" element={<CreateEventPage />} />
-          <Route path="events/:title" element={<EventDetailsPage />} />
+          <Route path="events/create" element={<CreateEventPage />} />
+          <Route path="events/:id" element={<EventDetailsPage />} />
           <Route path="login" element={<SignInPage />} />
           <Route path="register" element={<SignUpPage />} />
         </Route>
