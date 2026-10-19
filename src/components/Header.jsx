@@ -10,7 +10,7 @@ const Header = () => {
             <span className="bg-es-accent inline-block h-2 w-2"></span>
           </a>
           <div className="gap-space-sm mono-meta text-es-label gap-es-gap hidden items-center uppercase lg:flex">
-            <span>[ Public calendar ]</span>
+            <span>[ Your Time, Your Place ]</span>
             <span className="text-es-outline">•</span>
             <span>WBS Coding School Edition</span>
           </div>

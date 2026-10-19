@@ -8,7 +8,7 @@
   --color-es-accent: #dc3311; /* red accent */
   --color-es-primary: #1a1c1a; /* common text */
   --color-es-label: #73716b; /* dark gray form comments, labels, bages */
-  --color-es-outline: #c4c7c7; /* light fray */
+  --color-es-outline: #e3e2df; /* light fray */
   --color-es-divider: #e5e2dc;
   --font-sans: "Inter", sans-serif;
 
@@ -25,6 +25,20 @@ body, #root {
   font-family: var(--font-sans);
   background-color: var(--color-es-background);
   color: var(--color-es-primary);
+}
+
+h1,
+.h1 {
+  font-size: 84px;
+  line-height: 88px;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+h1:after,
+.h1:after {
+  display: inline;
+  content: ".";
+  color: var(--color-es-accent);
 }
 
 .headline {
