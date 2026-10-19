@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import LightTunnel from "../components/LightTunnel";
+import { LightTunnel } from "@/components";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
@@ -80,7 +80,7 @@ const SignUpPage = () => {
         throw new Error(data?.message || data?.error || `Fehler ${res.status}`);
       }
 
-      navigate("/signin");
+      navigate("/login");
     } catch (err) {
       setApiError(err instanceof TypeError ? "Server nicht erreichbar. Bitte später erneut versuchen." : err.message);
     } finally {
@@ -140,7 +140,7 @@ const SignUpPage = () => {
               <button disabled={busy} className="bg-black px-8 py-4 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-neutral-800 disabled:opacity-50">
                 {busy ? "Wird gesendet …" : "Konto erstellen"}
               </button>
-              <Link to="/signin" className="border-b-2 border-black text-[10px] font-bold tracking-wider uppercase">
+              <Link to="/login" className="border-b-2 border-black text-[10px] font-bold tracking-wider uppercase">
                 Schon registriert? Anmelden →
               </Link>
             </div>
