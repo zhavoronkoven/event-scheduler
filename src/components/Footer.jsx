@@ -6,11 +6,11 @@ const Footer = () => {
           <a href="/" className="gap-es-gap flex items-center font-bold">
             Event Scheduler
           </a>
-          <span className="text-es-outline">•</span>
-          <div className="gap-space-sm mono-meta text-es-label gap-es-gap hidden items-center uppercase lg:flex">
-            <span>[ Your Time, Your Place ]</span>
-            <span className="text-es-outline">•</span>
-            <span>WBS Coding School Edition</span>
+          <span className="text-es-outline hidden">•</span>
+          <div className="gap-space-sm mono-meta text-es-label gap-es-gap flex items-center uppercase">
+            <span className="hidden md:inline">[ Your Time, Your Place ]</span>
+            <span className="text-es-outline hidden xl:inline">•</span>
+            <span className="hidden xl:inline">WBS Coding School Edition</span>
           </div>
         </div>
         <div className="mono-meta text-es-label uppercase">Copyright © {new Date().getFullYear()}</div>

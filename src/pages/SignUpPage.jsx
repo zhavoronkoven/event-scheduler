@@ -103,7 +103,7 @@ const SignUpPage = () => {
             <h1 className="text-6xl leading-[0.95] font-extrabold tracking-tighter sm:text-7xl">
               Konto
               <br />
-              erstellen.
+              erstellen
             </h1>
             <p className="mt-5 font-serif text-base text-neutral-600 italic">Tritt dem öffentlichen Katalog bei. Veranstalte Treffen, kuratiere lokale Kalender und veröffentliche Community-Events.</p>
           </header>
@@ -137,8 +137,8 @@ const SignUpPage = () => {
             </div>
 
             <div className="flex items-center justify-between border-t border-neutral-200 pt-6 pb-12">
-              <button disabled={busy} className="bg-black px-8 py-4 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-neutral-800 disabled:opacity-50">
-                {busy ? "Wird gesendet …" : "Konto erstellen"}
+              <button disabled={busy} className="cursor-pointer bg-black px-8 py-3 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-neutral-800 disabled:opacity-50">
+                {busy ? "Wird gesendet&hellip;" : "Konto erstellen"}
               </button>
               <Link to="/login" className="border-b-2 border-black text-[10px] font-bold tracking-wider uppercase">
                 Schon registriert? Anmelden →

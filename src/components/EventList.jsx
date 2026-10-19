@@ -38,7 +38,7 @@ const EventList = () => {
       {events &&
         !isLoading &&
         events.map((event) => (
-          <Link to={`/events/${event.title}`} key={event.title}>
+          <Link to={`/events/${event.id}`} key={event.id}>
             <EventCard event={event} />
           </Link>
         ))}

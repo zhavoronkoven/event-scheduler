@@ -1,14 +1,14 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-   themes: light --default;
-};
+  themes: light --default;
+}
 
 @theme {
   --color-es-background: #faf9f6; /* body background */
   --color-es-accent: #dc3311; /* red accent */
   --color-es-primary: #1a1c1a; /* common text */
   --color-es-label: #73716b; /* dark gray form comments, labels, bages */
-  --color-es-outline: #e3e2df; /* light fray */
+  --color-es-outline: #c3c2bf; /* light fray */
   --color-es-divider: #e5e2dc;
   --font-sans: "Inter", sans-serif;
 
@@ -18,7 +18,8 @@
 }
 
 html,
-body, #root {
+body,
+#root {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -40,6 +41,9 @@ h1:after,
   content: ".";
   color: var(--color-es-accent);
 }
+.h1.nodot:after {
+  content: "";
+}
 
 .headline {
   font-size: 22px;
@@ -53,4 +57,13 @@ h1:after,
   line-height: 14px;
   letter-spacing: 0.08em;
   font-weight: 600;
+}
+
+.nav-link {
+  text-transform: uppercase;
+  padding: 0 20px;
+}
+
+.leaflet-marker-icon {
+  filter: grayscale(1);
 }
