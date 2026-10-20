@@ -136,7 +136,7 @@ const SignUpPage = () => {
               {errors.agree && <span className="mt-2 block text-[10px] font-semibold tracking-wider text-red-600 uppercase">{errors.agree}</span>}
             </div>
 
-            <div className="flex items-center justify-between border-t border-neutral-200 pt-6 pb-12">
+            <div className="flex flex-col items-start gap-5 border-t border-neutral-200 pt-6 pb-12 sm:flex-row sm:items-center sm:justify-between">
               <button disabled={busy} className="cursor-pointer bg-black px-8 py-3 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-neutral-800 disabled:opacity-50">
                 {busy ? "Wird gesendet&hellip;" : "Konto erstellen"}
               </button>

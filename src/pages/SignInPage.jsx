@@ -100,7 +100,7 @@ const SignInPage = () => {
             <h1 className="text-6xl leading-[0.95] font-extrabold tracking-tighter sm:text-7xl">
               Willkommen
               <br />
-              zurück.
+              zurück
             </h1>
             <p className="mt-5 font-serif text-base text-neutral-600 italic">Melde dich an, um Events zu erstellen und deinen Kalender zu pflegen.</p>
           </header>
