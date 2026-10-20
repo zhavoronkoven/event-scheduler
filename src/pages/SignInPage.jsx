@@ -90,14 +90,14 @@ const SignInPage = () => {
         <LightTunnel lightMode cableColor="#000" pulseColor="#" opacity={0.1} />
       </div>
       <div className="relative z-10">
-        <div className="mx-auto max-w-xl">
-          <div className="flex items-center gap-2 border-b border-neutral-200 px-4 py-3 text-[10px] font-semibold tracking-widest uppercase">
+        <div className="mx-auto max-w-xl px-4 sm:px-6">
+          <div className="flex items-center gap-2 border-b border-neutral-200 py-3 text-[10px] font-semibold tracking-widest uppercase">
             <span className="h-2 w-2 bg-es-accent" />
             <span>[ Anmeldung ]</span>
           </div>
 
-          <header className="px-4 pt-12 pb-10">
-            <h1 className="text-6xl leading-[0.95] font-extrabold tracking-tighter sm:text-7xl">
+          <header className="@container pt-10 pb-10">
+            <h1 className="text-6xl font-extrabold tracking-tighter sm:text-7xl">
               Willkommen
               <br />
               zurück
@@ -125,7 +125,7 @@ const SignInPage = () => {
               </label>
             ))}
 
-            <div className="flex items-center justify-between border-t border-neutral-200 pt-6 pb-12">
+            <div className="flex flex-col items-start gap-5 border-t border-neutral-200 pt-6 pb-12 sm:flex-row sm:items-center sm:justify-between">
               <button disabled={busy} className="bg-black px-8 py-4 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-neutral-800 disabled:opacity-50">
                 {busy ? "Wird gesendet …" : "Anmelden"}
               </button>
