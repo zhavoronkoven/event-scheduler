@@ -1,14 +1,8 @@
 import { Route, Routes } from "react-router";
-import {
-  HomePage,
-  CreateEventPage,
-  EventDetailsPage,
-  SignInPage,
-  SignUpPage,
-} from "./pages";
+import { HomePage, CreateEventPage, EventDetailsPage, SignInPage, SignUpPage } from "@/pages";
 
-// import { MainLayout, ProtectedLayout } from "./layout";
-import { MainLayout } from "./layout";
+// import { MainLayout, ProtectedLayout } from "@/layout";
+import { MainLayout } from "@/layout";
 
 function App() {
   return (

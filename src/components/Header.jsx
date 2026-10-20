@@ -1,15 +1,15 @@
-import { Navbar } from "../components";
+import { Navbar } from "@/components";
 
 const Header = () => {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-b-es-outline bg-es-background/60 backdrop-blur-lg">
-      <div className="container mx-auto flex items-center h-16 justify-between px-es-desktop">
+    <header className="border-b-es-outline bg-es-background/60 fixed top-0 right-0 left-0 z-50 border-b backdrop-blur-lg">
+      <div className="px-es-desktop container mx-auto flex h-16 items-center justify-between">
         <div className="flex items-center gap-8">
-          <a href="/" className="flex items-center gap-es-gap headline">
+          <a href="/" className="gap-es-gap headline flex items-center">
             Event Scheduler
-            <span className="w-2 h-2 inline-block bg-es-accent"></span>
+            <span className="bg-es-accent inline-block h-2 w-2"></span>
           </a>
-          <div className="hidden lg:flex items-center gap-space-sm uppercase mono-meta text-es-label gap-es-gap">
+          <div className="gap-space-sm mono-meta text-es-label gap-es-gap hidden items-center uppercase lg:flex">
             <span>[ Public calendar ]</span>
             <span className="text-es-outline">•</span>
             <span>WBS Coding School Edition</span>
