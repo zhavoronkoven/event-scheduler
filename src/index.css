@@ -28,22 +28,25 @@ body,
   color: var(--color-es-primary);
 }
 
-h1,
-.h1 {
-  font-size: 84px;
-  line-height: 88px;
-  letter-spacing: -0.03em;
-  font-weight: 800;
+@layer base {
+  h1,
+  .h1 {
+    font-size: 84px;
+    line-height: 88px;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+  }
+  h1:after,
+  .h1:after {
+    display: inline;
+    content: ".";
+    color: var(--color-es-accent);
+  }
+  .h1.nodot:after {
+    content: "";
+  }
 }
-h1:after,
-.h1:after {
-  display: inline;
-  content: ".";
-  color: var(--color-es-accent);
-}
-.h1.nodot:after {
-  content: "";
-}
+
 
 .headline {
   font-size: 22px;
