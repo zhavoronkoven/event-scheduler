@@ -14,7 +14,7 @@ const EventList = () => {
     const fetchedData = async () => {
       try {
         const data = await getAllEvents(controller);
-        setEvents(data.results);
+        setEvents(data);
       } catch (err) {
         if (err.name !== "AbortError") {
           throw new Error(err.message);
