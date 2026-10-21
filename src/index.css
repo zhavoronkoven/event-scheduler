@@ -45,8 +45,23 @@ body,
   .h1.nodot:after {
     content: "";
   }
-}
 
+  h2,
+  .h2 {
+    font-size: 48px;
+    line-height: 52px;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+  }
+
+  h3,
+  .h3 {
+    font-size: 34px;
+    line-height: 36px;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+  }
+}
 
 .headline {
   font-size: 22px;
