@@ -1,12 +1,4 @@
-// import { useAuth } from @/hooks";
-
 const CreateEventPage = () => {
-  // const { user } = useAuth();
-  // console.log(user);
-  // if (!user) {
-  //   return null;
-  // }
-
   return (
     <>
       <div className="hero bg-base-200 min-h-full">

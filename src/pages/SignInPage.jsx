@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
+import { useAuth } from "@/hooks";
 import { LightTunnel } from "@/components";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
@@ -39,6 +40,8 @@ const SignInPage = () => {
   const [apiError, setApiError] = useState("");
   const [busy, setBusy] = useState(false);
 
+  const { login } = useAuth();
+
   const handleChange = (key) => (e) => {
     setForm({ ...form, [key]: e.target.value });
     setErrors({ ...errors, [key]: undefined });
@@ -76,7 +79,9 @@ const SignInPage = () => {
       if (!token) throw new Error("No token received from the server.");
 
       localStorage.setItem(TOKEN_KEY, token);
-      navigate(location.state?.from?.pathname || "/", { replace: true });
+      login();
+      navigate("/");
+      // navigate(location.state?.from?.pathname || "/", { replace: true });
     } catch (err) {
       setApiError(err instanceof TypeError ? "Server unreachable. Please try again later." : err.message);
     } finally {

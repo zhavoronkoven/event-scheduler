@@ -23,7 +23,7 @@ const EventCard = ({ event }) => {
       </div>
       <div>{location}</div>
       <div>
-        <div class="bg-es-primary hidden h-10 w-10 items-center justify-center justify-self-end text-white opacity-0 group-hover:opacity-100 md:flex">→</div>
+        <div className="bg-es-primary hidden h-10 w-10 items-center justify-center justify-self-end text-white opacity-0 group-hover:opacity-100 md:flex">→</div>
       </div>
     </li>
   );
