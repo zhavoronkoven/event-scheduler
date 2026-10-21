@@ -92,13 +92,13 @@ const SignInPage = () => {
       <div className="relative z-10">
         <div className="mx-auto max-w-xl px-4 sm:px-6">
           <div className="flex items-center gap-2 border-b border-neutral-200 py-3 text-[10px] font-semibold tracking-widest uppercase">
-            <span className="h-2 w-2 bg-es-accent" />
+            <span className="bg-es-accent h-2 w-2" />
             <span>[ Sign in ]</span>
           </div>
 
           <header className="@container pt-10 pb-10">
             <h1 className="text-6xl font-extrabold tracking-tighter sm:text-7xl">
-              Welcome 
+              Welcome
               <br />
               back
             </h1>
@@ -126,11 +126,11 @@ const SignInPage = () => {
             ))}
 
             <div className="flex flex-col items-start gap-5 border-t border-neutral-200 pt-6 pb-12 sm:flex-row sm:items-center sm:justify-between">
-              <button disabled={busy} className="bg-black px-8 py-4 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-neutral-800 disabled:opacity-50">
-                {busy ? "Sending …" : "Register"}
+              <button disabled={busy} className="bg-black px-8 py-3 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-neutral-800 disabled:opacity-50">
+                {busy ? "Sending&hellip;" : "Sign in"}
               </button>
               <Link to="/register" className="border-b-2 border-black text-[10px] font-bold tracking-wider uppercase">
-                Don't have an account yet? Register →
+                Don't have an account yet? Sign up →
               </Link>
             </div>
           </form>

@@ -130,7 +130,7 @@ const SignUpPage = () => {
               <label className="flex items-start gap-3 text-xs text-neutral-700">
                 <input type="checkbox" checked={form.agree} onChange={handleAgree} aria-invalid={!!errors.agree} className="mt-0.5 h-4 w-4 accent-black" />
                 <span>
-                 I agree to <span className="border-b border-dotted border-neutral-400 text-black">the Archival Charter</span> and declare that my events comply with the guidelines for public, non-commercial curation.
+                  I agree to <span className="border-b border-dotted border-neutral-400 text-black">the Archival Charter</span> and declare that my events comply with the guidelines for public, non-commercial curation.
                 </span>
               </label>
               {errors.agree && <span className="mt-2 block text-[10px] font-semibold tracking-wider text-red-600 uppercase">{errors.agree}</span>}
@@ -138,10 +138,10 @@ const SignUpPage = () => {
 
             <div className="flex flex-col items-start gap-5 border-t border-neutral-200 pt-6 pb-12 sm:flex-row sm:items-center sm:justify-between">
               <button disabled={busy} className="cursor-pointer bg-black px-8 py-3 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-neutral-800 disabled:opacity-50">
-                {busy ? "Wird gesendet&hellip;" : "Create an account"}
+                {busy ? "Sending&hellip;" : "Create an account"}
               </button>
               <Link to="/login" className="border-b-2 border-black text-[10px] font-bold tracking-wider uppercase">
-                Already registered? Log in →
+                Already registered? Sign in →
               </Link>
             </div>
           </form>
