@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
 import EventMap from "@/components/EventMap";
+import { getDateLabel, getEventOrgDate } from "@/utils";
 
 const EventDetailsPage = () => {
   const { id } = useParams();
@@ -61,28 +62,9 @@ const EventDetailsPage = () => {
     return <div>No event found.</div>;
   }
 
-  const eventFullDate = new Date(event.date);
-  const eventOrgFullDate = new Date(event.createdAt);
-
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-  const eventDate = String(eventFullDate.getDate()).padStart(2, "0");
-  const eventDay = days[eventFullDate.getDay()];
-  const eventMonth = months[eventFullDate.getMonth()];
-  const eventYear = eventFullDate.getFullYear();
-  const eventHours = String(eventFullDate.getHours()).padStart(2, "0");
-  const eventMinutes = String(eventFullDate.getMinutes()).padStart(2, "0");
-
-  const eventOrgDate = eventOrgFullDate.toLocaleDateString("en-US", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false, // 24-часовой формат времени
-  });
-
+  const { eventDate, eventDay, eventMonth, eventYear, eventHours, eventMinutes } = getDateLabel(event.date);
+  const eventOrgDate = getEventOrgDate(event.createdAt);
+  
   const organiserAvatarLetters = String(organiser.name).toUpperCase().slice(0, 2);
 
   return (
