@@ -34,7 +34,7 @@ const EventList = () => {
   }, []);
 
   return (
-    <ul className="flex flex-col gap-4">
+    <ul className="flex flex-col w-full">
       {events &&
         !isLoading &&
         events.map((event) => (

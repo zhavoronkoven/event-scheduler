@@ -5,7 +5,7 @@ const MainLayout = () => {
   return (
     <div className="flex h-full flex-col">
       <Header />
-      <main className="px-es-desktop container mx-auto py-24">
+      <main className="px-es-mobile lg:px-es-desktop container mx-auto py-24">
         <Outlet />
       </main>
       <Footer />
