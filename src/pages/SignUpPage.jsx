@@ -9,21 +9,21 @@ const initialForm = { email: "", password: "", confirm: "", agree: false };
 const fields = [
   {
     key: "email",
-    label: "E-Mail-Adresse",
+    label: "E-mail address",
     type: "email",
     autoComplete: "email",
     placeholder: "name@domain.com",
   },
   {
     key: "password",
-    label: "Passwort",
+    label: "Password",
     type: "password",
     autoComplete: "new-password",
-    placeholder: "min. 8 Zeichen",
+    placeholder: "min. 8 characters",
   },
   {
     key: "confirm",
-    label: "Passwort bestätigen",
+    label: "Confirm password",
     type: "password",
     autoComplete: "new-password",
     placeholder: "",
@@ -32,10 +32,10 @@ const fields = [
 
 const validate = (form) => {
   const errors = {};
-  if (!/^\S+@\S+\.\S+$/.test(form.email.trim())) errors.email = "Bitte gültige E-Mail eingeben.";
-  if (form.password.length < 8) errors.password = "Mindestens 8 Zeichen.";
-  if (form.confirm !== form.password) errors.confirm = "Passwörter stimmen nicht überein.";
-  if (!form.agree) errors.agree = "Bitte stimme den Richtlinien zu.";
+  if (!/^\S+@\S+\.\S+$/.test(form.email.trim())) errors.email = "Please enter a valid email address.";
+  if (form.password.length < 8) errors.password = "At least 8 characters.";
+  if (form.confirm !== form.password) errors.confirm = "Passwords do not match.";
+  if (!form.agree) errors.agree = "Please agree to the guidelines.";
   return errors;
 };
 
@@ -97,15 +97,15 @@ const SignUpPage = () => {
         <div className="mx-auto max-w-xl">
           <div className="flex items-center gap-2 border-b border-neutral-200 px-4 py-3 text-[10px] font-semibold tracking-widest uppercase">
             <span className="bg-es-accent h-2 w-2" />
-            <span>[ Registrierung ]</span>
+            <span>[ Registration ]</span>
           </div>
           <header className="px-4 pt-12 pb-10">
             <h1 className="text-6xl leading-[0.95] font-extrabold tracking-tighter sm:text-7xl">
-              Konto
+              Create
               <br />
-              erstellen
+              an account
             </h1>
-            <p className="mt-5 font-serif text-base text-neutral-600 italic">Tritt dem öffentlichen Katalog bei. Veranstalte Treffen, kuratiere lokale Kalender und veröffentliche Community-Events.</p>
+            <p className="mt-5 font-serif text-base text-neutral-600 italic">Join the public directory. Host meetups, curate local calendars, and publish community events.</p>
           </header>
 
           <form onSubmit={handleSubmit} noValidate className="border-t border-neutral-200 px-4 pt-10">
@@ -130,7 +130,7 @@ const SignUpPage = () => {
               <label className="flex items-start gap-3 text-xs text-neutral-700">
                 <input type="checkbox" checked={form.agree} onChange={handleAgree} aria-invalid={!!errors.agree} className="mt-0.5 h-4 w-4 accent-black" />
                 <span>
-                  Ich stimme der <span className="border-b border-dotted border-neutral-400 text-black">Archival Charter</span> zu und erkläre, dass meine Events den Richtlinien für öffentliche, nicht-kommerzielle Kuratierung entsprechen.
+                 I agree to <span className="border-b border-dotted border-neutral-400 text-black">the Archival Charter</span> and declare that my events comply with the guidelines for public, non-commercial curation.
                 </span>
               </label>
               {errors.agree && <span className="mt-2 block text-[10px] font-semibold tracking-wider text-red-600 uppercase">{errors.agree}</span>}
@@ -138,10 +138,10 @@ const SignUpPage = () => {
 
             <div className="flex flex-col items-start gap-5 border-t border-neutral-200 pt-6 pb-12 sm:flex-row sm:items-center sm:justify-between">
               <button disabled={busy} className="cursor-pointer bg-black px-8 py-3 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-neutral-800 disabled:opacity-50">
-                {busy ? "Wird gesendet&hellip;" : "Konto erstellen"}
+                {busy ? "Wird gesendet&hellip;" : "Create an account"}
               </button>
               <Link to="/login" className="border-b-2 border-black text-[10px] font-bold tracking-wider uppercase">
-                Schon registriert? Anmelden →
+                Already registered? Log in →
               </Link>
             </div>
           </form>
