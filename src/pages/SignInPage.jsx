@@ -10,14 +10,14 @@ const initialForm = { email: "", password: "" };
 const fields = [
   {
     key: "email",
-    label: "E-Mail-Adresse",
+    label: "E-mail-Adress",
     type: "email",
     autoComplete: "email",
     placeholder: "name@domain.com",
   },
   {
     key: "password",
-    label: "Passwort",
+    label: "Password",
     type: "password",
     autoComplete: "current-password",
     placeholder: "",
@@ -26,8 +26,8 @@ const fields = [
 
 const validate = (form) => {
   const errors = {};
-  if (!/^\S+@\S+\.\S+$/.test(form.email.trim())) errors.email = "Bitte gültige E-Mail eingeben.";
-  if (!form.password) errors.password = "Bitte Passwort eingeben.";
+  if (!/^\S+@\S+\.\S+$/.test(form.email.trim())) errors.email = "Please enter a valid email address.";
+  if (!form.password) errors.password = "Please enter your password.";
   return errors;
 };
 
@@ -70,15 +70,15 @@ const SignInPage = () => {
           400: "E-Mail oder Passwort ist falsch.",
           401: "E-Mail oder Passwort ist falsch.",
         };
-        throw new Error(known[res.status] || "Anmeldung fehlgeschlagen. Bitte später erneut versuchen.");
+        throw new Error(known[res.status] || "Registration failed. Please try again later.");
       }
       const token = data?.token || data?.accessToken;
-      if (!token) throw new Error("Kein Token vom Server erhalten.");
+      if (!token) throw new Error("No token received from the server.");
 
       localStorage.setItem(TOKEN_KEY, token);
       navigate(location.state?.from?.pathname || "/", { replace: true });
     } catch (err) {
-      setApiError(err instanceof TypeError ? "Server nicht erreichbar. Bitte später erneut versuchen." : err.message);
+      setApiError(err instanceof TypeError ? "Server unreachable. Please try again later." : err.message);
     } finally {
       setBusy(false);
     }
@@ -93,20 +93,20 @@ const SignInPage = () => {
         <div className="mx-auto max-w-xl px-4 sm:px-6">
           <div className="flex items-center gap-2 border-b border-neutral-200 py-3 text-[10px] font-semibold tracking-widest uppercase">
             <span className="h-2 w-2 bg-es-accent" />
-            <span>[ Anmeldung ]</span>
+            <span>[ Registration ]</span>
           </div>
 
           <header className="@container pt-10 pb-10">
             <h1 className="text-6xl font-extrabold tracking-tighter sm:text-7xl">
-              Willkommen
+              Welcome 
               <br />
-              zurück
+              back
             </h1>
-            <p className="mt-5 font-serif text-base text-neutral-600 italic">Melde dich an, um Events zu erstellen und deinen Kalender zu pflegen.</p>
+            <p className="mt-5 font-serif text-base text-neutral-600 italic">Sign in to create events and manage your calendar.</p>
           </header>
 
           <form onSubmit={handleSubmit} noValidate className="border-t border-neutral-200 px-4 pt-10">
-            {location.state?.registered && !apiError && <p className="mb-6 border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-800">Registrierung erfolgreich. Bitte melde dich an.</p>}
+            {location.state?.registered && !apiError && <p className="mb-6 border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-800">Registration successful. Please log in.</p>}
 
             {apiError && (
               <p role="alert" className="mb-6 border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-700">
@@ -127,10 +127,10 @@ const SignInPage = () => {
 
             <div className="flex flex-col items-start gap-5 border-t border-neutral-200 pt-6 pb-12 sm:flex-row sm:items-center sm:justify-between">
               <button disabled={busy} className="bg-black px-8 py-4 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-neutral-800 disabled:opacity-50">
-                {busy ? "Wird gesendet …" : "Anmelden"}
+                {busy ? "Sending …" : "Register"}
               </button>
               <Link to="/register" className="border-b-2 border-black text-[10px] font-bold tracking-wider uppercase">
-                Noch kein Konto? Registrieren →
+                Don't have an account yet? Register →
               </Link>
             </div>
           </form>
