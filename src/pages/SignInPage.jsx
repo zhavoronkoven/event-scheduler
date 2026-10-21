@@ -93,7 +93,7 @@ const SignInPage = () => {
         <div className="mx-auto max-w-xl px-4 sm:px-6">
           <div className="flex items-center gap-2 border-b border-neutral-200 py-3 text-[10px] font-semibold tracking-widest uppercase">
             <span className="h-2 w-2 bg-es-accent" />
-            <span>[ Registration ]</span>
+            <span>[ Sign in ]</span>
           </div>
 
           <header className="@container pt-10 pb-10">
