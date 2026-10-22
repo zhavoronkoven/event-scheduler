@@ -8,7 +8,7 @@ const EventCard = ({ event }) => {
   const shortMonth = eventMonth.substring(0, 3).toUpperCase();
 
   return (
-    <li className="py-es-mobile xl:py-es-desktop text-es-label hover:bg-es-primary/2 md:border-t-es-outline container flex flex-col md:border-t md:py-8 lg:py-10 2xl:py-18">
+    <li className="py-es-mobile xl:py-es-desktop text-es-label md:border-t-es-outline hover:border-y hover:border-y-es-accent container flex flex-col md:border-t md:py-8 lg:py-10 2xl:py-18">
       <div className="flex flex-col gap-4 md:flex-row md:gap-15 lg:gap-20 xl:justify-between">
         <time className="flex items-baseline justify-between gap-3 md:flex-col md:justify-start lg:min-w-32.5 xl:min-w-35">
           <div className="flex items-baseline gap-2 md:flex-col lg:flex-row">
