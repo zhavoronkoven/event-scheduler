@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 import { getUpcomingEvents } from "@/api";
-import { EventCard } from "@/components";
+import { EventCard, EventCardSkeleton } from "@/components";
 
 const EventList = ({ events, setEvents }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -45,10 +45,18 @@ const EventList = ({ events, setEvents }) => {
       </div> */}
 
       <ul className="flex flex-col gap-4">
+        {isLoading && (
+          <>
+            <EventCardSkeleton />
+            <EventCardSkeleton />
+            <EventCardSkeleton />
+          </>
+        )}
+
         {events &&
           !isLoading &&
-          events.map((event) => (
-            <Link to={`/events/${event.id}`} key={event.id}>
+          events.map((event, index) => (
+            <Link to={`/events/${event.id}`} key={event.id} className="animate-in fade-in duration-500" style={{ animationDelay: `${index * 100}ms` }}>
               <EventCard event={event} />
             </Link>
           ))}
