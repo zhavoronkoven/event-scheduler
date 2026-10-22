@@ -2,6 +2,7 @@ export { default as Header } from "./Header";
 export { default as Navbar } from "./Navbar";
 export { default as EventList } from "./EventList";
 export { default as EventCard } from "./EventCard";
+export { default as EventCardSkeleton } from "./EventCardSkeleton";
 export { default as EventCalendar } from "./EventCalendar";
 export { default as CalendarModal } from "./CalendarModal";
 export { default as Footer } from "./Footer";
