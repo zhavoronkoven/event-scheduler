@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
-
+import { useParams, useNavigate } from "react-router";
 import EventMap from "@/components/EventMap";
 import { getDateLabel, getEventOrgDate } from "@/utils";
 
@@ -11,6 +10,7 @@ const EventDetailsPage = () => {
   const [organiser, setOrganiser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEventData = async () => {
@@ -64,16 +64,16 @@ const EventDetailsPage = () => {
 
   const { eventDate, eventDay, eventMonth, eventYear, eventHours, eventMinutes } = getDateLabel(event.date);
   const eventOrgDate = getEventOrgDate(event.createdAt);
-  
+
   const organiserAvatarLetters = String(organiser.name).toUpperCase().slice(0, 2);
 
   return (
     <>
       <div className="mb-3">
-        <a className="mono-meta inline-flex items-center gap-1.5 uppercase" href="/">
+        <button onClick={() => navigate(-1)} className="mono-meta inline-flex items-center gap-1.5 uppercase">
           <span className="inline-block">←</span>
           <span>Back to upcoming events</span>
-        </a>
+        </button>
       </div>
       <div className="border-b-es-outline gap-space-sm mono-meta text-es-label gap-es-gap mb-4 hidden items-center border-b pb-2 uppercase lg:flex">
         <span className="bg-es-accent inline-block h-2 w-2"></span>

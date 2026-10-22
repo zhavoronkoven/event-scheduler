@@ -4,8 +4,7 @@ import { Link } from "react-router";
 import { getAllEvents } from "@/api";
 import { EventCard } from "@/components";
 
-const EventList = () => {
-  const [events, setEvents] = useState(null);
+const EventList = ({ events, setEvents }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -34,7 +33,7 @@ const EventList = () => {
   }, []);
 
   return (
-    <ul className="flex flex-col w-full">
+    <ul className="flex w-full flex-col">
       {events &&
         !isLoading &&
         events.map((event) => (
