@@ -34,7 +34,7 @@ const EventList = ({ events, setEvents }) => {
 
   return (
     <>
-      <div className="border-b-es-outline gap-space-sm mono-meta text-es-label gap-es-gap mb-4 hidden grid-cols-[250px_1fr_250px_100px] items-center border-b pb-2 uppercase lg:grid">
+      {/* <div className="border-b-es-outline gap-space-sm mono-meta text-es-label gap-es-gap mb-4 hidden grid-cols-[250px_1fr_250px_100px] items-center border-b pb-2 uppercase lg:grid">
         <div className="gap-es-gap flex items-center">
           <span className="bg-es-accent inline-block h-2 w-2"></span>
           <span>Coming up</span>
@@ -42,7 +42,7 @@ const EventList = ({ events, setEvents }) => {
         <div>Title and Description</div>
         <div>Location</div>
         <div></div>
-      </div>
+      </div> */}
 
       <ul className="flex flex-col gap-4">
         {events &&

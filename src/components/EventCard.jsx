@@ -35,14 +35,14 @@ const EventCard = ({ event }) => {
           <HiArrowSmallRight className="text-es-label border-es-outline h-6 w-6 place-self-end border p-1 lg:h-9 lg:w-9 lg:p-2 xl:place-self-center" />
         </div>
       </div>
-      <div className="pr-4">
+      {/* <div className="pr-4">
         <h3 className="mb-2">{title}</h3>
         <p>{description}</p>
       </div>
       <div>{location}</div>
       <div>
         <div className="bg-es-primary hidden h-10 w-10 items-center justify-center justify-self-end text-white opacity-0 group-hover:opacity-100 md:flex">→</div>
-      </div>
+      </div> */}
     </li>
   );
 };
