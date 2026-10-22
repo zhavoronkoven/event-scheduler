@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router";
-import { HomePage, CreateEventPage, EventDetailsPage, SignInPage, SignUpPage } from "@/pages";
+import { HomePage, CreateEventPage, EventDetailsPage, SignInPage, SignUpPage, NotFoundPage } from "@/pages";
 
 // import { MainLayout, ProtectedLayout } from "@/layout";
 import { MainLayout } from "@/layout";
@@ -17,6 +17,7 @@ function App() {
           <Route path="events/:id" element={<EventDetailsPage />} />
           <Route path="login" element={<SignInPage />} />
           <Route path="register" element={<SignUpPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </>
