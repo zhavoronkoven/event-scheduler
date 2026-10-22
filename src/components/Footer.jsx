@@ -9,8 +9,6 @@ const Footer = () => {
           <span className="text-es-outline hidden">•</span>
           <div className="gap-space-sm mono-meta text-es-label gap-es-gap flex items-center uppercase">
             <span className="hidden md:inline">[ Your Time, Your Place ]</span>
-            <span className="text-es-outline hidden xl:inline">•</span>
-            <span className="hidden xl:inline">WBS Coding School Edition</span>
           </div>
         </div>
         <div className="mono-meta text-es-label uppercase">Copyright © {new Date().getFullYear()}</div>

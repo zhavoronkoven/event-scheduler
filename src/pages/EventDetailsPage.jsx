@@ -26,6 +26,11 @@ const EventDetailsPage = () => {
 
         const data = await resEvent.json();
 
+        if (!data) {
+          setError("Event not found");
+          return;
+        }
+
         const resOrgariser = await fetch(`http://localhost:3001/api/users/${data.organizerId}`);
 
         if (!resOrgariser.ok) {
@@ -55,7 +60,23 @@ const EventDetailsPage = () => {
   }
 
   if (error) {
-    return <div>Error loading event: {error}</div>;
+    return (
+      <>
+        <div className="mb-3">
+          <a className="mono-meta inline-flex items-center gap-1.5 uppercase" href="/">
+            <span className="inline-block">←</span>
+            <span>Back to upcoming events</span>
+          </a>
+        </div>
+        <div className="border-b-es-outline gap-space-sm mono-meta text-es-label gap-es-gap mb-4 hidden items-center border-b pb-2 uppercase lg:flex">
+          <span className="bg-es-accent inline-block h-2 w-2"></span>
+          <span>[ Event details ]</span>
+        </div>
+        <div className="mb-12">
+          <h1 className="mb-6">{error}</h1>
+        </div>
+      </>
+    );
   }
 
   if (!event) {

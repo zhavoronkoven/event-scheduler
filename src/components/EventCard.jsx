@@ -8,7 +8,7 @@ const EventCard = ({ event }) => {
   const shortMonth = eventMonth.substring(0, 3).toUpperCase();
 
   return (
-    <li className="py-es-mobile xl:py-es-desktop text-es-label md:border-t-es-outline hover:border-y hover:border-y-es-accent container flex flex-col md:border-t md:py-8 lg:py-10 2xl:py-18">
+    <li className="py-es-mobile xl:py-es-desktop text-es-label md:border-t-es-outline hover:border-y-es-accent container flex flex-col hover:border-y md:border-t md:py-8 lg:py-10 2xl:py-18">
       <div className="flex flex-col gap-4 md:flex-row md:gap-15 lg:gap-20 xl:justify-between">
         <time className="flex items-baseline justify-between gap-3 md:flex-col md:justify-start lg:min-w-32.5 xl:min-w-35">
           <div className="flex items-baseline gap-2 md:flex-col lg:flex-row">
@@ -34,6 +34,14 @@ const EventCard = ({ event }) => {
           </div>
           <HiArrowSmallRight className="text-es-label border-es-outline h-6 w-6 place-self-end border p-1 lg:h-9 lg:w-9 lg:p-2 xl:place-self-center" />
         </div>
+      </div>
+      <div className="pr-4">
+        <h3 className="mb-2">{title}</h3>
+        <p>{description}</p>
+      </div>
+      <div>{location}</div>
+      <div>
+        <div className="bg-es-primary hidden h-10 w-10 items-center justify-center justify-self-end text-white opacity-0 group-hover:opacity-100 md:flex">→</div>
       </div>
     </li>
   );

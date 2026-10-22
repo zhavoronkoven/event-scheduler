@@ -1,18 +1,18 @@
+import { Link } from "react-router";
 import { Navbar } from "@/components";
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 const Header = () => {
   return (
-    <header className="border-b-es-outline bg-es-background/60 fixed top-0 right-0 left-0 z-50 border-b backdrop-blur-lg">
-      <div className="px-es-desktop container mx-auto flex h-16 items-center justify-between">
+    <header className="border-b-es-outline bg-es-background/60 fixed inset-x-0 top-0 z-50 border-b backdrop-blur-lg">
+      <div className="px-es-mobile lg:px-es-desktop container mx-auto flex h-16 items-center justify-between">
         <div className="flex items-center gap-8">
-          <a href="/" className="gap-es-gap headline flex items-center text-nowrap">
+          <Link to="/" className="gap-es-gap headline flex items-center text-nowrap">
             Event Scheduler
             <span className="bg-es-accent inline-block h-2 w-2"></span>
-          </a>
-          <div className="gap-space-sm mono-meta text-es-label gap-es-gap hidden items-center uppercase lg:flex">
+          </Link>
+          <div className="gap-es-gap mono-meta text-es-label hidden items-center uppercase lg:flex">
             <span className="hidden md:inline">[ Your Time, Your Place ]</span>
-            <span className="text-es-outline hidden xl:inline">•</span>
-            <span className="hidden xl:inline">WBS Coding School Edition</span>
           </div>
         </div>
         <Navbar />
