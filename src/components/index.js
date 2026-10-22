@@ -3,6 +3,7 @@ export { default as Navbar } from "./Navbar";
 export { default as EventList } from "./EventList";
 export { default as EventCard } from "./EventCard";
 export { default as EventCalendar } from "./EventCalendar";
+export { default as CalendarModal } from "./CalendarModal";
 export { default as Footer } from "./Footer";
 export { default as LightTunnel } from "./LightTunnel";
 export { default as BackToTop } from "./BackToTop";
