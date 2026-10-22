@@ -5,3 +5,4 @@ export { default as EventCard } from "./EventCard";
 export { default as EventCalendar } from "./EventCalendar";
 export { default as Footer } from "./Footer";
 export { default as LightTunnel } from "./LightTunnel";
+export { default as BackToTop } from "./BackToTop";

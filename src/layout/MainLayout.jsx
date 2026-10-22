@@ -1,5 +1,6 @@
 import { Outlet } from "react-router";
 import { Header, Footer } from "@/components";
+import { BackToTop } from "@/components";
 
 const MainLayout = () => {
   return (
@@ -8,6 +9,7 @@ const MainLayout = () => {
       <main className="px-es-mobile lg:px-es-desktop container mx-auto py-24">
         <Outlet />
       </main>
+      <BackToTop />
       <Footer />
     </div>
   );
