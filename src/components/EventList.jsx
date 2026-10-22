@@ -4,8 +4,7 @@ import { Link } from "react-router";
 import { getUpcomingEvents } from "@/api";
 import { EventCard } from "@/components";
 
-const EventList = () => {
-  const [events, setEvents] = useState(null);
+const EventList = ({ events, setEvents }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
