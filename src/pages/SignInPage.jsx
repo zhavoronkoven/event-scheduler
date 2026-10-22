@@ -81,7 +81,6 @@ const SignInPage = () => {
       localStorage.setItem(TOKEN_KEY, token);
       login();
       navigate("/");
-      // navigate(location.state?.from?.pathname || "/", { replace: true });
     } catch (err) {
       setApiError(err instanceof TypeError ? "Server unreachable. Please try again later." : err.message);
     } finally {

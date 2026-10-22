@@ -73,7 +73,7 @@ const EventsMap = () => {
       </div>
 
       <div className="mb-16 w-2/3">
-        <h1 className="mb-6">Explore events near you</h1>
+        <h1 className="text-6xl mb-6">Explore events near you</h1>
       </div>
 
       {isLoading && <p className="mono-meta uppercase">Loading events...</p>}
