@@ -1,12 +1,12 @@
-import { getDateLabel } from "@/utils";
 import { HiArrowSmallRight } from "react-icons/hi2";
+import { getDateLabel } from "@/utils";
 
 const EventCard = ({ event }) => {
   const { title, description, date, location } = event;
-  console.log(location);
 
-  const { eventDate, eventDay, eventMonth, eventYear, eventHours, eventMinutes } = getDateLabel(event.date);
+  const { eventDate, eventMonth, eventYear, eventHours, eventMinutes } = getDateLabel(date);
   const shortMonth = eventMonth.substring(0, 3).toUpperCase();
+
   return (
     <li className="py-es-mobile xl:py-es-desktop text-es-label hover:bg-es-primary/2 md:border-t-es-outline container flex flex-col md:border-t md:py-8 lg:py-10 2xl:py-18">
       <div className="flex flex-col gap-4 md:flex-row md:gap-15 lg:gap-20 xl:justify-between">
@@ -27,7 +27,7 @@ const EventCard = ({ event }) => {
           <p className="text-es-label text-sm md:text-base lg:text-lg xl:text-xl xl:leading-8">{description}</p>
         </div>
 
-        <div className="border-y-es-outline text-es-primary md:text-es-label flex items-center justify-between border-y py-4 md:flex-col md:justify-between md:border-0 md:py-0 xl:flex-row  xl:gap-20">
+        <div className="border-y-es-outline text-es-primary md:text-es-label flex items-center justify-between border-y py-4 md:flex-col md:justify-between md:border-0 md:py-0 xl:flex-row xl:gap-20">
           <div className="md:text-es-primary text-end font-medium md:text-base md:font-normal lg:text-lg xl:max-w-38 xl:text-xl">
             <span className="bg-es-accent mr-2 mb-0.5 inline-block h-2 w-2 items-center rounded-full md:mr-1.5 lg:h-2 lg:w-2"></span>
             {location}
