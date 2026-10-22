@@ -11,8 +11,6 @@ const Header = () => {
           </a>
           <div className="gap-space-sm mono-meta text-es-label gap-es-gap hidden items-center uppercase lg:flex">
             <span className="hidden md:inline">[ Your Time, Your Place ]</span>
-            <span className="text-es-outline hidden xl:inline">•</span>
-            <span className="hidden xl:inline">WBS Coding School Edition</span>
           </div>
         </div>
         <Navbar />

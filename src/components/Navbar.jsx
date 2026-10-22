@@ -9,7 +9,10 @@ const Navbar = () => {
   return (
     <div className="mono-meta">
       <NavLink to="/" className="nav-link">
-        Explore
+        Upcoming events
+      </NavLink>
+      <NavLink to="/map" className="nav-link">
+        Map
       </NavLink>
 
       {isAuthenticated ? (
