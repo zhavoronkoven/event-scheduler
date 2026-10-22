@@ -78,8 +78,7 @@ const SignInPage = () => {
       const token = data?.token || data?.accessToken;
       if (!token) throw new Error("No token received from the server.");
 
-      localStorage.setItem(TOKEN_KEY, token);
-      login();
+      login(token);
       navigate("/");
     } catch (err) {
       setApiError(err instanceof TypeError ? "Server unreachable. Please try again later." : err.message);
