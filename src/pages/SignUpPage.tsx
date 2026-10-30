@@ -4,7 +4,28 @@ import { LightTunnel } from "@/components";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 
-const initialForm = { email: "", password: "", confirm: "", agree: false };
+type SignUpForm = {
+  email: string;
+  password: string;
+  confirm: string;
+  agree: boolean;
+};
+
+type FormErrors = Partial<Record<keyof SignUpForm, string>>;
+
+const initialForm: SignUpForm = { email: "", password: "", confirm: "", agree: false };
+
+type FieldKey = "email" | "password" | "confirm";
+
+type Field = {
+  key: FieldKey;
+  label: string;
+  type: string;
+  autoComplete: string;
+  placeholder: string;
+  hint?: string;
+  caption?: string;
+};
 
 const fields = [
   {
@@ -30,8 +51,8 @@ const fields = [
   },
 ];
 
-const validate = (form) => {
-  const errors = {};
+const validate = (form: SignUpForm): FormErrors => {
+  const errors: FormErrors = {};
   if (!/^\S+@\S+\.\S+$/.test(form.email.trim())) errors.email = "Please enter a valid email address.";
   if (form.password.length < 8) errors.password = "At least 8 characters.";
   if (form.confirm !== form.password) errors.confirm = "Passwords do not match.";
