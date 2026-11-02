@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { LightTunnel } from "@/components";
+import { useState, type ChangeEvent, type SubmitEvent } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 
@@ -27,7 +27,7 @@ type Field = {
   caption?: string;
 };
 
-const fields = [
+const fields: Field[]= [
   {
     key: "email",
     label: "E-mail address",
@@ -63,21 +63,21 @@ const validate = (form: SignUpForm): FormErrors => {
 const SignUpPage = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState(initialForm);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [apiError, setApiError] = useState("");
   const [busy, setBusy] = useState(false);
 
-  const handleChange = (key) => (e) => {
+  const handleChange = (key: FieldKey) => (e: ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [key]: e.target.value });
     setErrors({ ...errors, [key]: undefined });
   };
 
-  const handleAgree = (e) => {
+  const handleAgree = (e: ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, agree: e.target.checked });
     setErrors({ ...errors, agree: undefined });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setApiError("");
 
@@ -103,7 +103,13 @@ const SignUpPage = () => {
 
       navigate("/login");
     } catch (err) {
-      setApiError(err instanceof TypeError ? "Server nicht erreichbar. Bitte später erneut versuchen." : err.message);
+      if (err instanceof TypeError) {
+        setApiError("Server unreachable. Please try again later.");
+      } else if (err instanceof Error) {
+        setApiError(err.message)
+      }else {
+        setApiError("Unknown error.")
+      }
     } finally {
       setBusy(false);
     }
