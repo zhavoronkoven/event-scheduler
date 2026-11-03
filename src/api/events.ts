@@ -1,7 +1,9 @@
+import { type EventItemType } from "@/types";
+
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-export const getAllEvents = async (controller) => {
-  const response = await fetch(`${BASE_URL}/events/upcoming`, { signal: controller.signal });
+export const getAllEvents = async (controller: AbortController): Promise<EventItemType[]> => {
+  const response = await fetch(`${BASE_URL}/events`, { signal: controller.signal });
   
   if (!response.ok) {
     throw new Error("Failed to fetch events");
@@ -11,7 +13,7 @@ export const getAllEvents = async (controller) => {
   return data;
 };
 
-export const getUpcomingEvents = async (controller) => {
+export const getUpcomingEvents = async (controller: AbortController): Promise<EventItemType[]> => {
   const response = await fetch(`${BASE_URL}/events/upcoming`, { signal: controller.signal });
 
   if (!response.ok) {
