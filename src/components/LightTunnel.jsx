@@ -230,9 +230,9 @@ const LightTunnel = ({
   intro = true,
   variation = 0,
   lightMode = false,
-  dpr,
+  dpr = undefined,
   className = '',
-  style,
+  style = undefined,
   ...rest
 }) => {
   const containerRef = useRef(null);

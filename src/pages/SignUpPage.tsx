@@ -1,12 +1,33 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { LightTunnel } from "@/components";
+import { useState, type ChangeEvent, type SubmitEvent } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 
-const initialForm = { email: "", password: "", confirm: "", agree: false };
+type SignUpForm = {
+  email: string;
+  password: string;
+  confirm: string;
+  agree: boolean;
+};
 
-const fields = [
+type FormErrors = Partial<Record<keyof SignUpForm, string>>;
+
+const initialForm: SignUpForm = { email: "", password: "", confirm: "", agree: false };
+
+type FieldKey = "email" | "password" | "confirm";
+
+type Field = {
+  key: FieldKey;
+  label: string;
+  type: string;
+  autoComplete: string;
+  placeholder: string;
+  hint?: string;
+  caption?: string;
+};
+
+const fields: Field[]= [
   {
     key: "email",
     label: "E-mail address",
@@ -30,8 +51,8 @@ const fields = [
   },
 ];
 
-const validate = (form) => {
-  const errors = {};
+const validate = (form: SignUpForm): FormErrors => {
+  const errors: FormErrors = {};
   if (!/^\S+@\S+\.\S+$/.test(form.email.trim())) errors.email = "Please enter a valid email address.";
   if (form.password.length < 8) errors.password = "At least 8 characters.";
   if (form.confirm !== form.password) errors.confirm = "Passwords do not match.";
@@ -42,21 +63,21 @@ const validate = (form) => {
 const SignUpPage = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState(initialForm);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [apiError, setApiError] = useState("");
   const [busy, setBusy] = useState(false);
 
-  const handleChange = (key) => (e) => {
+  const handleChange = (key: FieldKey) => (e: ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [key]: e.target.value });
     setErrors({ ...errors, [key]: undefined });
   };
 
-  const handleAgree = (e) => {
+  const handleAgree = (e: ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, agree: e.target.checked });
     setErrors({ ...errors, agree: undefined });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setApiError("");
 
@@ -82,7 +103,13 @@ const SignUpPage = () => {
 
       navigate("/login");
     } catch (err) {
-      setApiError(err instanceof TypeError ? "Server nicht erreichbar. Bitte später erneut versuchen." : err.message);
+      if (err instanceof TypeError) {
+        setApiError("Server unreachable. Please try again later.");
+      } else if (err instanceof Error) {
+        setApiError(err.message)
+      }else {
+        setApiError("Unknown error.")
+      }
     } finally {
       setBusy(false);
     }
