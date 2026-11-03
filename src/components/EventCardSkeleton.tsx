@@ -1,6 +1,6 @@
 const EventCardSkeleton = () => {
   return (
-    <li className="py-es-mobile xl:py-es-desktop bg-es-background/30 text-es-label md:border-t-es-outline container flex min-h-[280px] flex-col rounded-lg md:min-h-[220px] md:border-t md:py-8 lg:min-h-[240px] lg:py-10 xl:min-h-[260px] 2xl:py-18">
+    <li className="py-es-mobile xl:py-es-desktop bg-es-background/30 text-es-label md:border-t-es-outline container flex min-h-70 flex-col rounded-lg md:min-h-55 md:border-t md:py-8 lg:min-h-60 lg:py-10 xl:min-h-65 2xl:py-18">
       <div className="flex flex-col gap-4 md:flex-row md:gap-15 lg:gap-20 xl:justify-between">
         {/* Time section skeleton */}
         <div className="flex items-baseline justify-between gap-3 md:flex-col md:justify-start lg:min-w-32.5 xl:min-w-35">

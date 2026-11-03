@@ -5,10 +5,23 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router";
 
 import { getDateLabel, toDateKey } from "@/utils";
+import type { EventItemType } from "@/types";
 
-let saved = { date: null, month: null };
+type SelectedDateType = {
+  date: string | null;
+  month: Date | null;
+}
 
-const EventCalendar = ({ events, className = "" }) => {
+let saved: SelectedDateType = { date: null, month: null };
+
+type EventCalendarProps = { 
+  events: EventItemType[] | null;
+  className?: string;
+}
+
+
+
+const EventCalendar = ({ events, className = "" }: EventCalendarProps) => {
   const navigate = useNavigate();
 
   const [selectedDate, setSelectedDate] = useState(saved.date);
@@ -21,7 +34,7 @@ const EventCalendar = ({ events, className = "" }) => {
     saved = { date: selectedDate, month };
   }, [selectedDate, month]);
 
-  function handlerDayClick(date) {
+  function handlerDayClick(date: Date) {
     const key = toDateKey(date);
     const found = (events ?? []).filter((event) => toDateKey(event.date) === key);
 

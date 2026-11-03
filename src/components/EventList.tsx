@@ -3,8 +3,14 @@ import { Link } from "react-router";
 
 import { getUpcomingEvents } from "@/api";
 import { EventCard, EventCardSkeleton } from "@/components";
+import type { EventItemType } from "@/types/event";
 
-const EventList = ({ events, setEvents }) => {
+type EventListProps = {
+  events: EventItemType[] | null;
+  setEvents: (events: EventItemType[] | null) => void;
+}
+
+const EventList = ({ events, setEvents }: EventListProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -15,7 +21,7 @@ const EventList = ({ events, setEvents }) => {
         const data = await getUpcomingEvents(controller);
         setEvents(data);
       } catch (err) {
-        if (err.name !== "AbortError") {
+        if (err instanceof Error && err.name !== "AbortError") {
           throw new Error(err.message);
         }
       } finally {
