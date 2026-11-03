@@ -2,9 +2,11 @@ import { EventList, EventCalendar, CalendarModal } from "@/components";
 import { useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
+import { type EventItemType } from "@/types";
+
 const HomePage = () => {
-  const [isModal, setModal] = useState(false);
-  const [events, setEvents] = useState(null);
+  const [isModal, setModal] = useState<boolean>(false);
+  const [events, setEvents] = useState<EventItemType[] | null>(null);
 
   const toggleModal = () => setModal((prev) => !prev);
 
