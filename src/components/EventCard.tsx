@@ -1,14 +1,19 @@
 import { HiArrowSmallRight } from "react-icons/hi2";
 import { getDateLabel } from "@/utils";
+import type { EventItemType } from "@/types";
 
-const EventCard = ({ event }) => {
+type EventCardProps = {
+  event: EventItemType;
+}
+
+const EventCard = ({ event }: EventCardProps) => {
   const { title, description, date, location } = event;
 
   const { eventDate, eventMonth, eventYear, eventHours, eventMinutes } = getDateLabel(date);
   const shortMonth = eventMonth.substring(0, 3).toUpperCase();
 
   return (
-    <li className="py-es-mobile xl:py-es-desktop text-es-label md:border-t-es-outline hover:border-y-es-accent container flex min-h-[280px] flex-col transition-all duration-300 hover:border-y md:min-h-[220px] md:border-t md:py-8 lg:min-h-[240px] lg:py-10 xl:min-h-[260px] 2xl:py-18">
+    <li className="py-es-mobile xl:py-es-desktop text-es-label md:border-t-es-outline hover:border-y-es-accent container flex min-h-70 flex-col transition-all duration-300 hover:border-y md:min-h-55 md:border-t md:py-8 lg:min-h-60 lg:py-10 xl:min-h-65 2xl:py-18">
       <div className="flex flex-col gap-4 md:flex-row md:gap-15 lg:gap-20 xl:justify-between">
         <time className="flex items-baseline justify-between gap-3 md:flex-col md:justify-start lg:min-w-32.5 xl:min-w-35">
           <div className="flex items-baseline gap-2 md:flex-col lg:flex-row">
