@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 import { getUpcomingEvents } from "@/api";
 import { EventCard, EventCardSkeleton } from "@/components";
-import type { EventItemType } from "@/types/event";
+import { type EventItemType } from "@/types/event";
 
 type EventListProps = {
   events: EventItemType[] | null;
@@ -12,6 +12,7 @@ type EventListProps = {
 
 const EventList = ({ events, setEvents }: EventListProps) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -20,13 +21,15 @@ const EventList = ({ events, setEvents }: EventListProps) => {
       try {
         const data = await getUpcomingEvents(controller);
         setEvents(data);
+        setError(null);
       } catch (err) {
         if (err instanceof Error && err.name !== "AbortError") {
-          throw new Error(err.message);
+          console.error(err);
+          setError("Unexpected response from server");
         }
       } finally {
         if (!controller.signal.aborted) {
-          setIsLoading((prev) => !prev);
+          setIsLoading(false);
         }
       }
     };
@@ -40,15 +43,12 @@ const EventList = ({ events, setEvents }: EventListProps) => {
 
   return (
     <>
-      {/* <div className="border-b-es-outline gap-space-sm mono-meta text-es-label gap-es-gap mb-4 hidden grid-cols-[250px_1fr_250px_100px] items-center border-b pb-2 uppercase lg:grid">
-        <div className="gap-es-gap flex items-center">
-          <span className="bg-es-accent inline-block h-2 w-2"></span>
-          <span>Coming up</span>
-        </div>
-        <div>Title and Description</div>
-        <div>Location</div>
-        <div></div>
-      </div> */}
+
+     {error && (
+        <p role="alert" className="border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-700">
+          {error}
+        </p>
+      )}
 
       <ul className="flex flex-col gap-4">
         {isLoading && (
