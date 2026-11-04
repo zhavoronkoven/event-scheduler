@@ -3,16 +3,21 @@ import { Link } from "react-router";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 
 import { getUpcomingEvents } from "@/api";
+import type { EventItemType } from "@/types";
 
-const DEFAULT_CENTER = [49.0069, 8.4037];
+type MapBoundsProps = {
+  events: EventItemType[];
+};
 
-const MapBounds = ({ events }) => {
+const DEFAULT_CENTER: [number, number] = [49.0069, 8.4037];
+
+const MapBounds = ({ events }: MapBoundsProps) => {
   const map = useMap();
 
   useEffect(() => {
-    const coordinates = events
+    const coordinates: [number, number][] = events
       .filter((event) => event.latitude != null && event.longitude != null)
-      .map((event) => [Number(event.latitude), Number(event.longitude)])
+      .map<[number, number]>((event) => [Number(event.latitude), Number(event.longitude)])
       .filter(([latitude, longitude]) => Number.isFinite(latitude) && Number.isFinite(longitude));
 
     if (coordinates.length === 1) {
@@ -28,7 +33,7 @@ const MapBounds = ({ events }) => {
 };
 
 const EventsMap = () => {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState<EventItemType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -40,7 +45,7 @@ const EventsMap = () => {
         const data = await getUpcomingEvents(controller);
         setEvents(data);
       } catch (err) {
-        if (err.name !== "AbortError") setError(err.message || "Failed to load events.");
+        if (err instanceof Error && err.name !== "AbortError") setError(err.message || "Failed to load events.");
       } finally {
         if (!controller.signal.aborted) setIsLoading(false);
       }
@@ -73,7 +78,7 @@ const EventsMap = () => {
       </div>
 
       <div className="mb-16 w-2/3">
-        <h1 className="text-6xl mb-6">Explore events near you</h1>
+        <h1 className="mb-6 text-6xl">Explore events near you</h1>
       </div>
 
       {isLoading && <p className="mono-meta uppercase">Loading events...</p>}

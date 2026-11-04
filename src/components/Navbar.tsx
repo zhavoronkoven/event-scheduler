@@ -1,7 +1,12 @@
 import { NavLink } from "react-router";
 import { useAuth } from "@/hooks";
 
-const Navbar = ({ closeMenu, isMobile }) => {
+type NavbarProps = {
+  closeMenu?: () => void;
+  isMobile?: boolean;
+};
+
+const Navbar = ({ closeMenu, isMobile }: NavbarProps) => {
   const { isAuthed, logout } = useAuth();
 
   const handleLinkClick = () => {
@@ -14,12 +19,12 @@ const Navbar = ({ closeMenu, isMobile }) => {
   };
 
   return (
-    <div className={`mono-meta ${isMobile ? 'flex flex-col gap-6 text-lg' : 'flex items-center gap-6'}`}>
+    <div className={`mono-meta ${isMobile ? "flex flex-col gap-6 text-lg" : "flex items-center gap-6"}`}>
       <NavLink to="/" className="nav-link" onClick={handleLinkClick}>
         Upcoming events
       </NavLink>
       <NavLink to="/map" className="nav-link" onClick={handleLinkClick}>
-     Map
+        Map
       </NavLink>
 
       {isAuthed && (
@@ -35,12 +40,8 @@ const Navbar = ({ closeMenu, isMobile }) => {
           <NavLink to="/login" className="nav-link" onClick={handleLinkClick}>
             Sign in
           </NavLink>
-          <NavLink
-            to="/register"
-            className={`cursor-pointer bg-black px-8 py-3 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-neutral-800 ${isMobile ? 'inline-block text-center' : 'ml-5'}`}
-            onClick={handleLinkClick}
-          >
-         Sign up
+          <NavLink to="/register" className={`cursor-pointer bg-black px-8 py-3 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-neutral-800 ${isMobile ? "inline-block text-center" : "ml-5"}`} onClick={handleLinkClick}>
+            Sign up
           </NavLink>
         </>
       ) : (

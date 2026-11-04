@@ -1,6 +1,13 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
-const EventMap = ({ lat, lng, zoom = 14, popup = "" }) => {
+type EventMapProps = {
+  lat: number | null;
+  lng: number | null;
+  zoom?: number;
+  popup?: string;
+};
+
+const EventMap = ({ lat, lng, zoom = 14, popup = "" }: EventMapProps) => {
   if (lat == null || lng == null) {
     return <div>Map is not available.</div>;
   }

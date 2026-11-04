@@ -3,13 +3,23 @@ import { useParams, useNavigate } from "react-router";
 import EventMap from "@/components/EventMap";
 import { getDateLabel, getEventOrgDate } from "@/utils";
 
+import type { EventItemType } from "@/types";
+
+type EventDetailsType = EventItemType & {
+  createdAt: string;
+};
+
+type OrganizerType = {
+  name: string | null;
+};
+
 const EventDetailsPage = () => {
   const { id } = useParams();
 
-  const [event, setEvent] = useState(null);
-  const [organiser, setOrganiser] = useState(null);
+  const [event, setEvent] = useState<EventDetailsType | null>(null);
+  const [organiser, setOrganiser] = useState<OrganizerType | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,7 +52,11 @@ const EventDetailsPage = () => {
         setEvent(data);
         setOrganiser(dataOrganiser);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("Failed to load event.");
+        }
       } finally {
         setLoading(false);
       }
@@ -81,6 +95,10 @@ const EventDetailsPage = () => {
 
   if (!event) {
     return <div>No event found.</div>;
+  }
+
+  if (!organiser) {
+    return <div>Organizer not found.</div>;
   }
 
   const { eventDate, eventDay, eventMonth, eventYear, eventHours, eventMinutes } = getDateLabel(event.date);
