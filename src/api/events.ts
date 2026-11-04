@@ -1,4 +1,6 @@
-import { type EventItemType } from "@/types";
+import { z } from "zod";
+
+import { type EventItemType, EventListSchema } from "@/types";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -9,8 +11,15 @@ export const getAllEvents = async (controller: AbortController): Promise<EventIt
     throw new Error("Failed to fetch events");
   }
 
-  const data = await response.json();
-  return data;
+  const data: unknown = await response.json();
+  const result = EventListSchema.safeParse(data);
+
+  if (!result.success) { 
+    console.error(z.prettifyError(result.error));
+    throw new Error("Unexpected response from server");
+  }
+
+  return result.data;
 };
 
 export const getUpcomingEvents = async (controller: AbortController): Promise<EventItemType[]> => {
@@ -20,6 +29,13 @@ export const getUpcomingEvents = async (controller: AbortController): Promise<Ev
     throw new Error("Failed to fetch upcoming events");
   }
 
-  const data = await response.json();
-  return data;
+  const data: unknown = await response.json();
+  const result = EventListSchema.safeParse(data);
+
+  if (!result.success) { 
+    console.error(z.prettifyError(result.error));
+    throw new Error("Unexpected response from server");
+  }
+
+  return result.data;
 };
