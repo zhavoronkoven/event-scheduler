@@ -1,7 +1,13 @@
+import type { EventItemType } from "@/types";
 import EventCalendar from "./EventCalendar";
 
-const CalendarModal = ({ events, toggleModal }) => {
-  const handerOverlayClick = (e) => e.target === e.currentTarget && toggleModal();
+type CalendarModalProps = {
+  events: EventItemType[] | null;
+  toggleModal: () => void;
+}
+
+const CalendarModal = ({ events, toggleModal }: CalendarModalProps) => {
+  const handerOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => e.target === e.currentTarget && toggleModal();
   return (
     <div onClick={(e) => handerOverlayClick(e)} className="bg-scrim fixed inset-0 z-50 flex place-content-center items-center justify-center backdrop-blur-md sm:items-center sm:p-4">
       <div className="bg-es-background/40 relative rounded-2xl p-10">

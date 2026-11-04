@@ -1,4 +1,6 @@
-const getDateLabel = (date) => {
+type DateInput = string | number | Date;
+
+const getDateLabel = (date: DateInput) => {
   const eventFullDate = new Date(date);
 
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -14,7 +16,7 @@ const getDateLabel = (date) => {
   return { eventDate, eventDay, eventMonth, eventYear, eventHours, eventMinutes };
 };
 
-const getEventOrgDate = (createdAtDate) => {
+const getEventOrgDate = (createdAtDate: DateInput) => {
   const eventOrgFullDate = new Date(createdAtDate);
 
   const eventOrgDate = eventOrgFullDate.toLocaleString("en-US", {
@@ -29,7 +31,7 @@ const getEventOrgDate = (createdAtDate) => {
   return eventOrgDate;
 };
 
-const toDateKey = (value) => {
+const toDateKey = (value: DateInput) => {
   const d = new Date(value);
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");

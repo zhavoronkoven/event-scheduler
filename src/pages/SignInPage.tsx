@@ -1,15 +1,34 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { useState, type ChangeEvent, type SubmitEvent } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
+import { useAuth } from "@/hooks";
 import { LightTunnel } from "@/components";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
+// const TOKEN_KEY = "token";
 
-const initialForm = { email: "", password: "", confirm: "", agree: false };
+type SignInForm = {
+  email: string;
+  password: string;
+};
 
-const fields = [
+type FormErrors = Partial<Record<keyof SignInForm, string>>;
+
+const initialForm: SignInForm = { email: "", password: "" };
+
+type Field = {
+  key: keyof SignInForm;
+  label: string;
+  type: string;
+  autoComplete: string;
+  placeholder: string;
+  hint?: string;
+  caption?: string;
+};
+
+const fields: Field[] = [
   {
     key: "email",
-    label: "E-mail address",
+    label: "E-mail-Adress",
     type: "email",
     autoComplete: "email",
     placeholder: "name@domain.com",
@@ -18,45 +37,34 @@ const fields = [
     key: "password",
     label: "Password",
     type: "password",
-    autoComplete: "new-password",
-    placeholder: "min. 8 characters",
-  },
-  {
-    key: "confirm",
-    label: "Confirm password",
-    type: "password",
-    autoComplete: "new-password",
+    autoComplete: "current-password",
     placeholder: "",
   },
 ];
 
-const validate = (form) => {
-  const errors = {};
+const validate = (form: SignInForm): FormErrors => {
+  const errors: FormErrors = {};
   if (!/^\S+@\S+\.\S+$/.test(form.email.trim())) errors.email = "Please enter a valid email address.";
-  if (form.password.length < 8) errors.password = "At least 8 characters.";
-  if (form.confirm !== form.password) errors.confirm = "Passwords do not match.";
-  if (!form.agree) errors.agree = "Please agree to the guidelines.";
+  if (!form.password) errors.password = "Please enter your password.";
   return errors;
 };
 
-const SignUpPage = () => {
+const SignInPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [form, setForm] = useState(initialForm);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [apiError, setApiError] = useState("");
   const [busy, setBusy] = useState(false);
 
-  const handleChange = (key) => (e) => {
+  const { login } = useAuth();
+
+  const handleChange = (key: keyof SignInForm) => (e: ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [key]: e.target.value });
     setErrors({ ...errors, [key]: undefined });
   };
 
-  const handleAgree = (e) => {
-    setForm({ ...form, agree: e.target.checked });
-    setErrors({ ...errors, agree: undefined });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setApiError("");
 
@@ -66,7 +74,7 @@ const SignUpPage = () => {
 
     setBusy(true);
     try {
-      const res = await fetch(`${API_URL}/users`, {
+      const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -75,14 +83,28 @@ const SignUpPage = () => {
         }),
       });
 
-      if (!res.ok) {
-        const data = await res.json().catch(() => null);
-        throw new Error(data?.message || data?.error || `Fehler ${res.status}`);
-      }
+      const data = await res.json().catch(() => null);
 
-      navigate("/login");
+      if (!res.ok) {
+        const known: Record<number, string> = {
+          400: "Email or password is incorrect.",
+          401: "Email or password is incorrect.",
+        };
+        throw new Error(known[res.status] || "Sign-in failed. Please try again later.");
+      }
+      const token = data?.token || data?.accessToken;
+      if (!token) throw new Error("No token received from the server.");
+
+      login(token);
+      navigate("/");
     } catch (err) {
-      setApiError(err instanceof TypeError ? "Server nicht erreichbar. Bitte später erneut versuchen." : err.message);
+      if (err instanceof TypeError) {
+        setApiError("Server unreachable. Please try again later.");
+      } else if (err instanceof Error) {
+        setApiError(err.message);
+      } else {
+        setApiError("Unknown error.");
+      }
     } finally {
       setBusy(false);
     }
@@ -94,21 +116,24 @@ const SignUpPage = () => {
         <LightTunnel lightMode cableColor="#000" pulseColor="#" opacity={0.1} />
       </div>
       <div className="relative z-10">
-        <div className="mx-auto max-w-xl">
-          <div className="flex items-center gap-2 border-b border-neutral-200 px-4 py-3 text-[10px] font-semibold tracking-widest uppercase">
+        <div className="mx-auto max-w-xl px-4 sm:px-6">
+          <div className="flex items-center gap-2 border-b border-neutral-200 py-3 text-[10px] font-semibold tracking-widest uppercase">
             <span className="bg-es-accent h-2 w-2" />
-            <span>[ Registration ]</span>
+            <span>[ Sign in ]</span>
           </div>
-          <header className="px-4 pt-12 pb-10">
-            <h1 className="text-6xl leading-[0.95] font-extrabold tracking-tighter sm:text-7xl">
-              Create
+
+          <header className="@container pt-10 pb-10">
+            <h1 className="text-6xl font-extrabold tracking-tighter sm:text-7xl">
+              Welcome
               <br />
-              an account
+              back
             </h1>
-            <p className="mt-5 font-serif text-base text-neutral-600 italic">Join the public directory. Host meetups, curate local calendars, and publish community events.</p>
+            <p className="mt-5 font-serif text-base text-neutral-600 italic">Sign in to create events and manage your calendar.</p>
           </header>
 
           <form onSubmit={handleSubmit} noValidate className="border-t border-neutral-200 px-4 pt-10">
+            {location.state?.registered && !apiError && <p className="mb-6 border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-800">Registration successful. Please log in.</p>}
+
             {apiError && (
               <p role="alert" className="mb-6 border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-700">
                 {apiError}
@@ -126,22 +151,12 @@ const SignUpPage = () => {
               </label>
             ))}
 
-            <div className="mb-8">
-              <label className="flex items-start gap-3 text-xs text-neutral-700">
-                <input type="checkbox" checked={form.agree} onChange={handleAgree} aria-invalid={!!errors.agree} className="mt-0.5 h-4 w-4 accent-black" />
-                <span>
-                  I agree to <span className="border-b border-dotted border-neutral-400 text-black">the Archival Charter</span> and declare that my events comply with the guidelines for public, non-commercial curation.
-                </span>
-              </label>
-              {errors.agree && <span className="mt-2 block text-[10px] font-semibold tracking-wider text-red-600 uppercase">{errors.agree}</span>}
-            </div>
-
             <div className="flex flex-col items-start gap-5 border-t border-neutral-200 pt-6 pb-12 sm:flex-row sm:items-center sm:justify-between">
-              <button disabled={busy} className="cursor-pointer bg-black px-8 py-3 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-neutral-800 disabled:opacity-50">
-                {busy ? "Sending&hellip;" : "Create an account"}
+              <button disabled={busy} className="bg-black px-8 py-3 text-[11px] font-bold tracking-wider text-white uppercase hover:bg-neutral-800 disabled:opacity-50">
+                {busy ? "Sending&hellip;" : "Sign in"}
               </button>
-              <Link to="/login" className="border-b-2 border-black text-[10px] font-bold tracking-wider uppercase">
-                Already registered? Sign in →
+              <Link to="/register" className="border-b-2 border-black text-[10px] font-bold tracking-wider uppercase">
+                Don't have an account yet? Sign up →
               </Link>
             </div>
           </form>
@@ -151,4 +166,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignInPage;

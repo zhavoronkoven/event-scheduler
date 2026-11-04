@@ -1,9 +1,34 @@
-import { useState } from "react";
+import { useState, type ChangeEvent, type SubmitEvent } from "react";
 import { useNavigate } from "react-router";
+
+type FormState = {
+  title: string;
+  description: string;
+  date: string;
+  location: string;
+  latitude: string;
+  longitude: string;
+};
+
+type FieldKey = keyof FormState;
+type InputFieldKey = Exclude<FieldKey, "description">;
+
+type FormErrors = Partial<Record<FieldKey, string>>;
+
+type FieldConfig = {
+  key: InputFieldKey;
+  label: string;
+  type: string;
+  autoComplete: string;
+  placeholder: string;
+  hint?: string;
+  caption?: string;
+  step?: string;
+};
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 
-const initialForm = {
+const initialForm: FormState = {
   title: "",
   description: "",
   date: "",
@@ -12,7 +37,7 @@ const initialForm = {
   longitude: "",
 };
 
-const fields = [
+const fields: FieldConfig[] = [
   { key: "title", label: "Event title", type: "text", autoComplete: "off", placeholder: "Event Title" },
   { key: "date", label: "Date and time", type: "datetime-local", autoComplete: "off", placeholder: "" },
   { key: "location", label: "Location", type: "text", autoComplete: "street-address", placeholder: "Schloßbezirk 10, 76131 Karlsruhe" },
@@ -20,8 +45,8 @@ const fields = [
   { key: "longitude", label: "Longitude", type: "number", autoComplete: "off", placeholder: "49.01438194665317", step: "any" },
 ];
 
-const validate = (form) => {
-  const errors = {};
+const validate = (form: FormState): FormErrors => {
+  const errors: FormErrors = {};
 
   if (form.title.trim().length < 3) errors.title = "At least 3 characters.";
   if (!form.description.trim()) errors.description = "Please enter a description.";
@@ -35,17 +60,17 @@ const validate = (form) => {
 
 const CreateEventPage = () => {
   const navigate = useNavigate();
-  const [form, setForm] = useState(initialForm);
-  const [errors, setErrors] = useState({});
+  const [form, setForm] = useState<FormState>(initialForm);
+  const [errors, setErrors] = useState<FormErrors>({});
   const [apiError, setApiError] = useState("");
   const [busy, setBusy] = useState(false);
 
-  const handleChange = (key) => (e) => {
+  const handleChange = (key: FieldKey) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [key]: e.target.value });
     setErrors({ ...errors, [key]: undefined });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setApiError("");
 
@@ -83,7 +108,13 @@ const CreateEventPage = () => {
 
       navigate(`/events/${data.id}`);
     } catch (err) {
-      setApiError(err instanceof TypeError ? "Server nicht erreichbar. Bitte später erneut versuchen." : err.message);
+      if (err instanceof TypeError) {
+        setApiError("Server nicht erreichbar. Bitte später erneut versuchen.");
+      } else if (err instanceof Error) {
+        setApiError(err.message);
+      } else {
+        setApiError("Failed to create event.");
+      }
     } finally {
       setBusy(false);
     }
@@ -120,19 +151,8 @@ const CreateEventPage = () => {
                   <span>{label}</span>
                   <span className="font-normal text-neutral-300">{hint}</span>
                 </span>
-                <input
-                  type={type}
-                  autoComplete={autoComplete}
-                  placeholder={placeholder}
-                  step={step}
-                  aria-invalid={!!errors[key]}
-                  value={form[key]}
-                  onChange={handleChange(key)}
-                  className={`w-full border-b bg-transparent py-3 text-base outline-none placeholder:text-neutral-400 focus:border-black ${errors[key] ? "border-red-500" : "border-neutral-200"}`}
-                />
-                <span className={`mt-2 block text-right text-[10px] font-semibold tracking-wider uppercase ${errors[key] ? "text-red-600" : "text-neutral-700"}`}>
-                  {errors[key] || caption}
-                </span>
+                <input type={type} autoComplete={autoComplete} placeholder={placeholder} step={step} aria-invalid={!!errors[key]} value={form[key]} onChange={handleChange(key)} className={`w-full border-b bg-transparent py-3 text-base outline-none placeholder:text-neutral-400 focus:border-black ${errors[key] ? "border-red-500" : "border-neutral-200"}`} />
+                <span className={`mt-2 block text-right text-[10px] font-semibold tracking-wider uppercase ${errors[key] ? "text-red-600" : "text-neutral-700"}`}>{errors[key] || caption}</span>
               </label>
             ))}
 
@@ -140,17 +160,8 @@ const CreateEventPage = () => {
               <span className="flex items-baseline justify-between text-[10px] font-bold tracking-wider uppercase">
                 <span>Description</span>
               </span>
-              <textarea
-                placeholder="Some Description for the Event"
-                aria-invalid={!!errors.description}
-                value={form.description}
-                onChange={handleChange("description")}
-                rows={5}
-                className={`w-full resize-y border-b bg-transparent py-3 text-base outline-none placeholder:text-neutral-400 focus:border-black ${errors.description ? "border-red-500" : "border-neutral-200"}`}
-              />
-              <span className={`mt-2 block text-right text-[10px] font-semibold tracking-wider uppercase ${errors.description ? "text-red-600" : "text-neutral-700"}`}>
-                {errors.description || "Describe the event"}
-              </span>
+              <textarea placeholder="Some Description for the Event" aria-invalid={!!errors.description} value={form.description} onChange={handleChange("description")} rows={5} className={`w-full resize-y border-b bg-transparent py-3 text-base outline-none placeholder:text-neutral-400 focus:border-black ${errors.description ? "border-red-500" : "border-neutral-200"}`} />
+              <span className={`mt-2 block text-right text-[10px] font-semibold tracking-wider uppercase ${errors.description ? "text-red-600" : "text-neutral-700"}`}>{errors.description || "Describe the event"}</span>
             </label>
 
             <div className="flex items-center justify-end border-t border-neutral-200 pt-6 pb-12">
