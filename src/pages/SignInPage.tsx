@@ -1,14 +1,31 @@
-import { useState } from "react";
+import { useState, type ChangeEvent, type SubmitEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useAuth } from "@/hooks";
 import { LightTunnel } from "@/components";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
-const TOKEN_KEY = "token";
+// const TOKEN_KEY = "token";
 
-const initialForm = { email: "", password: "" };
+type SignInForm = {
+  email: string;
+  password: string;
+};
 
-const fields = [
+type FormErrors = Partial<Record<keyof SignInForm, string>>;
+
+const initialForm: SignInForm = { email: "", password: "" };
+
+type Field = {
+  key: keyof SignInForm;
+  label: string;
+  type: string;
+  autoComplete: string;
+  placeholder: string;
+  hint?: string;
+  caption?: string;
+};
+
+const fields: Field[] = [
   {
     key: "email",
     label: "E-mail-Adress",
@@ -25,8 +42,8 @@ const fields = [
   },
 ];
 
-const validate = (form) => {
-  const errors = {};
+const validate = (form: SignInForm): FormErrors => {
+  const errors: FormErrors = {};
   if (!/^\S+@\S+\.\S+$/.test(form.email.trim())) errors.email = "Please enter a valid email address.";
   if (!form.password) errors.password = "Please enter your password.";
   return errors;
@@ -36,18 +53,18 @@ const SignInPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [form, setForm] = useState(initialForm);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [apiError, setApiError] = useState("");
   const [busy, setBusy] = useState(false);
 
   const { login } = useAuth();
 
-  const handleChange = (key) => (e) => {
+  const handleChange = (key: keyof SignInForm) => (e: ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [key]: e.target.value });
     setErrors({ ...errors, [key]: undefined });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setApiError("");
 
@@ -69,11 +86,11 @@ const SignInPage = () => {
       const data = await res.json().catch(() => null);
 
       if (!res.ok) {
-        const known = {
-          400: "E-Mail oder Passwort ist falsch.",
-          401: "E-Mail oder Passwort ist falsch.",
+        const known: Record<number, string> = {
+          400: "Email or password is incorrect.",
+          401: "Email or password is incorrect.",
         };
-        throw new Error(known[res.status] || "Registration failed. Please try again later.");
+        throw new Error(known[res.status] || "Sign-in failed. Please try again later.");
       }
       const token = data?.token || data?.accessToken;
       if (!token) throw new Error("No token received from the server.");
@@ -81,7 +98,13 @@ const SignInPage = () => {
       login(token);
       navigate("/");
     } catch (err) {
-      setApiError(err instanceof TypeError ? "Server unreachable. Please try again later." : err.message);
+      if (err instanceof TypeError) {
+        setApiError("Server unreachable. Please try again later.");
+      } else if (err instanceof Error) {
+        setApiError(err.message);
+      } else {
+        setApiError("Unknown error.");
+      }
     } finally {
       setBusy(false);
     }
